@@ -1,0 +1,737 @@
+# arachne-pnr 0.1+187+0 (git sha1 e97e35c, g++ 4.8.4-2ubuntu1~14.04.3 -O2)
+.model main
+.inputs CLKIN
+.outputs J3[0] J3[1] J3[2] J3[3] J3[4]
+.names $false
+.names $true
+1
+.gate SB_IO PACKAGE_PIN=CLKIN LATCH_INPUT_VALUE= CLOCK_ENABLE= INPUT_CLK= OUTPUT_CLK= OUTPUT_ENABLE= D_OUT_0= D_OUT_1= D_IN_0=CLKIN$2 D_IN_1=
+.attr loc "0,8/1"
+.param PIN_TYPE 000001
+.gate SB_IO PACKAGE_PIN=J3[0] LATCH_INPUT_VALUE= CLOCK_ENABLE= INPUT_CLK= OUTPUT_CLK= OUTPUT_ENABLE= D_OUT_0=$false D_OUT_1= D_IN_0= D_IN_1=
+.attr loc "9,0/1"
+.param PIN_TYPE 011001
+.gate SB_IO PACKAGE_PIN=J3[1] LATCH_INPUT_VALUE= CLOCK_ENABLE= INPUT_CLK= OUTPUT_CLK= OUTPUT_ENABLE= D_OUT_0=inst16.inst0.inst7_CO D_OUT_1= D_IN_0= D_IN_1=
+.attr loc "9,0/0"
+.param PIN_TYPE 011001
+.gate SB_IO PACKAGE_PIN=J3[2] LATCH_INPUT_VALUE= CLOCK_ENABLE= INPUT_CLK= OUTPUT_CLK= OUTPUT_ENABLE= D_OUT_0=inst29.inst8.inst7_Q D_OUT_1= D_IN_0= D_IN_1=
+.attr loc "8,0/1"
+.param PIN_TYPE 011001
+.gate SB_IO PACKAGE_PIN=J3[3] LATCH_INPUT_VALUE= CLOCK_ENABLE= INPUT_CLK= OUTPUT_CLK= OUTPUT_ENABLE= D_OUT_0=inst21_O D_OUT_1= D_IN_0= D_IN_1=
+.attr loc "7,0/1"
+.param PIN_TYPE 011001
+.gate SB_IO PACKAGE_PIN=J3[4] LATCH_INPUT_VALUE= CLOCK_ENABLE= INPUT_CLK= OUTPUT_CLK= OUTPUT_ENABLE= D_OUT_0=inst31_O D_OUT_1= D_IN_0= D_IN_1=
+.attr loc "5,0/1"
+.param PIN_TYPE 011001
+.gate ICESTORM_LC I0=$false I1=inst0.inst0.inst1_CO I2=$true$2 I3=$false CIN= CLK=CLKIN$2$2 CEN=inst0.inst1.CE SR=$false LO= O=inst0.inst0.inst1_CO COUT=
+.attr loc "11,11/4"
+.attr src "pattern.v:27|pattern.v:10"
+.param DFF_ENABLE 1
+.param LUT_INIT 1100001100111100
+.gate ICESTORM_LC I0=inst0.inst1.inst1_Q I1=inst0.inst0.inst1_CO I2=$false I3=$false CIN= CLK=CLKIN$2$2 CEN=inst0.inst1.CE SR=$false LO= O=inst0.inst1.inst1_Q COUT=
+.attr loc "8,11/7"
+.attr src "pattern.v:28|/usr/local/bin/../share/yosys/ice40/cells_map.v:43"
+.param DFF_ENABLE 1
+.param LUT_INIT 0110
+.gate ICESTORM_LC I0=$false I1=inst0.inst1.inst2_Q I2=$false I3=inst0.inst0.inst3_CO CIN=inst0.inst0.inst3_CO CLK=CLKIN$2$2 CEN=inst0.inst1.CE SR=$false LO= O=inst0.inst1.inst2_Q COUT=inst0.inst0.inst5_CO
+.attr loc "8,11/2"
+.attr src "pattern.v:29|pattern.v:14"
+.param CARRY_ENABLE 1
+.param DFF_ENABLE 1
+.param LUT_INIT 1100001100111100
+.gate ICESTORM_LC I0=$false I1=inst0.inst1.inst3_Q I2=$false I3=inst0.inst0.inst5_CO CIN= CLK=CLKIN$2$2 CEN=inst0.inst1.CE SR=$false LO= O=inst0.inst1.inst3_Q COUT=
+.attr loc "8,11/3"
+.attr src "pattern.v:30|pattern.v:16"
+.param DFF_ENABLE 1
+.param LUT_INIT 1100001100111100
+.gate ICESTORM_LC I0=$false I1=inst16.inst0.inst1_CO I2=$true$2 I3=$false CIN= CLK=CLKIN$2$2 CEN=$true SR=$false LO= O=inst16.inst0.inst1_CO COUT=
+.attr loc "4,3/4"
+.attr src "pattern.v:69|pattern.v:10"
+.param DFF_ENABLE 1
+.param LUT_INIT 1100001100111100
+.gate ICESTORM_LC I0=inst16.inst1.inst1_Q I1=inst16.inst0.inst1_CO I2=$false I3=$false CIN= CLK=CLKIN$2$2 CEN=$true SR=$false LO= O=inst16.inst1.inst1_Q COUT=
+.attr loc "2,3/3"
+.attr src "pattern.v:70|/usr/local/bin/../share/yosys/ice40/cells_map.v:43"
+.param DFF_ENABLE 1
+.param LUT_INIT 0110
+.gate ICESTORM_LC I0=$false I1=inst16.inst1.inst2_Q I2=$false I3=inst16.inst0.inst3_CO CIN=inst16.inst0.inst3_CO CLK=CLKIN$2$2 CEN=$true SR=$false LO= O=inst16.inst1.inst2_Q COUT=inst16.inst0.inst5_CO
+.attr loc "1,3/2"
+.attr src "pattern.v:71|pattern.v:14"
+.param CARRY_ENABLE 1
+.param DFF_ENABLE 1
+.param LUT_INIT 1100001100111100
+.gate ICESTORM_LC I0=$false I1=inst16.inst1.inst3_Q I2=$false I3=inst16.inst0.inst5_CO CIN=inst16.inst0.inst5_CO CLK=CLKIN$2$2 CEN=$true SR=$false LO= O=inst16.inst1.inst3_Q COUT=inst16.inst0.inst7_CO$2
+.attr loc "1,3/3"
+.attr src "pattern.v:72|pattern.v:16"
+.param CARRY_ENABLE 1
+.param DFF_ENABLE 1
+.param LUT_INIT 1100001100111100
+.gate ICESTORM_LC I0=$false I1=inst17.inst0.inst1_CO I2=$true$2 I3=$false CIN= CLK=CLKIN$2$2 CEN=inst16.inst0.inst7_CO$3 SR=$false LO= O=inst17.inst0.inst1_CO COUT=
+.attr loc "7,12/7"
+.attr src "pattern.v:122|pattern.v:99"
+.param DFF_ENABLE 1
+.param LUT_INIT 1100001100111100
+.gate ICESTORM_LC I0=inst17.inst1.inst1_Q I1=inst17.inst0.inst1_CO I2=$false I3=$false CIN= CLK=CLKIN$2$2 CEN=inst16.inst0.inst7_CO$3 SR=$false LO= O=inst17.inst1.inst1_Q COUT=
+.attr loc "7,13/6"
+.attr src "pattern.v:123|/usr/local/bin/../share/yosys/ice40/cells_map.v:43"
+.param DFF_ENABLE 1
+.param LUT_INIT 0110
+.gate ICESTORM_LC I0=$false I1=inst17.inst1.inst2_Q I2=$false I3=inst17.inst0.inst3_CO CIN=inst17.inst0.inst3_CO CLK=CLKIN$2$2 CEN=inst16.inst0.inst7_CO$3 SR=$false LO= O=inst17.inst1.inst2_Q COUT=inst17.inst0.inst5_CO
+.attr loc "7,13/2"
+.attr src "pattern.v:124|pattern.v:103"
+.param CARRY_ENABLE 1
+.param DFF_ENABLE 1
+.param LUT_INIT 1100001100111100
+.gate ICESTORM_LC I0=$false I1=inst17.inst1.inst3_Q I2=$false I3=inst17.inst0.inst5_CO CIN=inst17.inst0.inst5_CO CLK=CLKIN$2$2 CEN=inst16.inst0.inst7_CO$3 SR=$false LO= O=inst17.inst1.inst3_Q COUT=inst17.inst0.inst7_CO
+.attr loc "7,13/3"
+.attr src "pattern.v:125|pattern.v:105"
+.param CARRY_ENABLE 1
+.param DFF_ENABLE 1
+.param LUT_INIT 1100001100111100
+.gate ICESTORM_LC I0=$false I1=inst17.inst1.inst4_Q I2=$false I3=inst17.inst0.inst7_CO CIN=inst17.inst0.inst7_CO CLK=CLKIN$2$2 CEN=inst16.inst0.inst7_CO$3 SR=$false LO= O=inst17.inst1.inst4_Q COUT=inst17.inst0.inst9_CO
+.attr loc "7,13/4"
+.attr src "pattern.v:126|pattern.v:107"
+.param CARRY_ENABLE 1
+.param DFF_ENABLE 1
+.param LUT_INIT 1100001100111100
+.gate ICESTORM_LC I0=$false I1=inst17.inst1.inst5_Q I2=$false I3=inst17.inst0.inst9_CO CIN= CLK=CLKIN$2$2 CEN=inst16.inst0.inst7_CO$3 SR=$false LO= O=inst17.inst1.inst5_Q COUT=
+.attr loc "7,13/5"
+.attr src "pattern.v:127|pattern.v:109"
+.param DFF_ENABLE 1
+.param LUT_INIT 1100001100111100
+.gate ICESTORM_LC I0=$false I1=inst24.inst0.inst1_CO I2=$true$2 I3=$false CIN= CLK=CLKIN$2$2 CEN=inst16.inst0.inst7_CO$3 SR=inst24.inst1.RESET LO= O=inst24.inst0.inst1_CO COUT=
+.attr loc "9,13/7"
+.attr src "pattern.v:178|pattern.v:164"
+.param DFF_ENABLE 1
+.param LUT_INIT 1100001100111100
+.gate ICESTORM_LC I0=inst24.inst1.inst1_Q I1=inst24.inst0.inst1_CO I2=$false I3=$false CIN= CLK=CLKIN$2$2 CEN=inst16.inst0.inst7_CO$3 SR=inst24.inst1.RESET LO= O=inst24.inst1.inst1_Q COUT=
+.attr loc "9,14/5"
+.attr src "pattern.v:179|/usr/local/bin/../share/yosys/ice40/cells_map.v:43"
+.param DFF_ENABLE 1
+.param LUT_INIT 0110
+.gate ICESTORM_LC I0=$false I1=inst24.inst1.inst2_Q I2=$false I3=inst24.inst0.inst3_CO CIN= CLK=CLKIN$2$2 CEN=inst16.inst0.inst7_CO$3 SR=inst24.inst1.RESET LO= O=inst24.inst1.inst2_Q COUT=
+.attr loc "9,14/2"
+.attr src "pattern.v:180|pattern.v:168"
+.param DFF_ENABLE 1
+.param LUT_INIT 1100001100111100
+.gate ICESTORM_LC I0=inst25_O I1=inst18_O I2=inst26_Q I3=$false CIN= CLK=CLKIN$2$2 CEN=inst16.inst0.inst7_CO$3 SR=$false LO= O=inst26_Q COUT=
+.attr loc "8,13/7"
+.attr src "pattern.v:331|pattern.v:332"
+.param DFF_ENABLE 1
+.param LUT_INIT 0101010001010100
+.gate ICESTORM_LC I0=$true$2 I1=inst15.inst7_O I2=inst29.LOAD I3=$false CIN= CLK=CLKIN$2$2 CEN=inst16.inst0.inst7_CO$3 SR=$false LO= O=inst29.inst8.inst0_Q COUT=
+.attr loc "7,8/0"
+.attr src "pattern.v:203|pattern.v:224"
+.param DFF_ENABLE 1
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst29.inst8.inst0_Q I1=inst15.inst6_O I2=inst29.LOAD I3=$false CIN= CLK=CLKIN$2$2 CEN=inst16.inst0.inst7_CO$3 SR=$false LO= O=inst29.inst8.inst1_Q COUT=
+.attr loc "7,8/2"
+.attr src "pattern.v:204|pattern.v:225"
+.param DFF_ENABLE 1
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst29.inst8.inst1_Q I1=inst15.inst5_O I2=inst29.LOAD I3=$false CIN= CLK=CLKIN$2$2 CEN=inst16.inst0.inst7_CO$3 SR=$false LO= O=inst29.inst8.inst2_Q COUT=
+.attr loc "7,8/1"
+.attr src "pattern.v:205|pattern.v:226"
+.param DFF_ENABLE 1
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst29.inst8.inst2_Q I1=inst15.inst4_O I2=inst29.LOAD I3=$false CIN= CLK=CLKIN$2$2 CEN=inst16.inst0.inst7_CO$3 SR=$false LO= O=inst29.inst8.inst3_Q COUT=
+.attr loc "7,8/7"
+.attr src "pattern.v:206|pattern.v:227"
+.param DFF_ENABLE 1
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst29.inst8.inst3_Q I1=inst15.inst3_O I2=inst29.LOAD I3=$false CIN= CLK=CLKIN$2$2 CEN=inst16.inst0.inst7_CO$3 SR=$false LO= O=inst29.inst8.inst4_Q COUT=
+.attr loc "7,8/6"
+.attr src "pattern.v:207|pattern.v:228"
+.param DFF_ENABLE 1
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst29.inst8.inst4_Q I1=inst15.inst2_O I2=inst29.LOAD I3=$false CIN= CLK=CLKIN$2$2 CEN=inst16.inst0.inst7_CO$3 SR=$false LO= O=inst29.inst8.inst5_Q COUT=
+.attr loc "7,8/4"
+.attr src "pattern.v:208|pattern.v:229"
+.param DFF_ENABLE 1
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst29.inst8.inst5_Q I1=inst15.inst1_O I2=inst29.LOAD I3=$false CIN= CLK=CLKIN$2$2 CEN=inst16.inst0.inst7_CO$3 SR=$false LO= O=inst29.inst8.inst6_Q COUT=
+.attr loc "7,8/5"
+.attr src "pattern.v:209|pattern.v:230"
+.param DFF_ENABLE 1
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst29.inst8.inst6_Q I1=inst15.inst0_O I2=inst29.LOAD I3=$false CIN= CLK=CLKIN$2$2 CEN=inst16.inst0.inst7_CO$3 SR=$false LO= O=inst29.inst8.inst7_Q COUT=
+.attr loc "7,7/7"
+.attr src "pattern.v:210|pattern.v:231"
+.param DFF_ENABLE 1
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$false I1=$true$2 I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst1.inst0_O COUT=
+.attr loc "8,6/3"
+.attr src "pattern.v:53"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$false I1=$false I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst1.inst1_O COUT=
+.attr loc "2,8/7"
+.attr src "pattern.v:54"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$false I1=$true$2 I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst1.inst2_O COUT=
+.attr loc "5,10/4"
+.attr src "pattern.v:55"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$true$2 I1=$false I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst1.inst3_O COUT=
+.attr loc "6,11/4"
+.attr src "pattern.v:56"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$false I1=$false I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst1.inst4_O COUT=
+.attr loc "7,9/2"
+.attr src "pattern.v:57"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$true$2 I1=$true$2 I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst1.inst5_O COUT=
+.attr loc "5,6/3"
+.attr src "pattern.v:58"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$true$2 I1=$true$2 I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst1.inst6_O COUT=
+.attr loc "9,9/7"
+.attr src "pattern.v:59"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$false I1=$false I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst1.inst7_O COUT=
+.attr loc "6,8/1"
+.attr src "pattern.v:60"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst3.inst0_O I1=inst4.inst0_O I2=inst0.inst1.inst1_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst10.inst0_O COUT=
+.attr loc "8,6/4"
+.attr src "pattern.v:53"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst3.inst1_O I1=inst4.inst1_O I2=inst0.inst1.inst1_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst10.inst1_O COUT=
+.attr loc "9,8/3"
+.attr src "pattern.v:54"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst3.inst2_O I1=inst4.inst2_O I2=inst0.inst1.inst1_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst10.inst2_O COUT=
+.attr loc "5,11/7"
+.attr src "pattern.v:55"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst3.inst3_O I1=inst4.inst3_O I2=inst0.inst1.inst1_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst10.inst3_O COUT=
+.attr loc "7,10/4"
+.attr src "pattern.v:56"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst3.inst4_O I1=inst4.inst4_O I2=inst0.inst1.inst1_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst10.inst4_O COUT=
+.attr loc "7,9/5"
+.attr src "pattern.v:57"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst3.inst5_O I1=inst4.inst5_O I2=inst0.inst1.inst1_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst10.inst5_O COUT=
+.attr loc "6,6/7"
+.attr src "pattern.v:58"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst3.inst6_O I1=inst4.inst6_O I2=inst0.inst1.inst1_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst10.inst6_O COUT=
+.attr loc "9,9/5"
+.attr src "pattern.v:59"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst3.inst7_O I1=inst4.inst7_O I2=inst0.inst1.inst1_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst10.inst7_O COUT=
+.attr loc "6,7/2"
+.attr src "pattern.v:60"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst5.inst0_O I1=inst6.inst0_O I2=inst0.inst1.inst1_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst11.inst0_O COUT=
+.attr loc "8,8/3"
+.attr src "pattern.v:53"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst5.inst1_O I1=inst6.inst1_O I2=inst0.inst1.inst1_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst11.inst1_O COUT=
+.attr loc "5,8/0"
+.attr src "pattern.v:54"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst5.inst2_O I1=inst6.inst2_O I2=inst0.inst1.inst1_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst11.inst2_O COUT=
+.attr loc "9,10/5"
+.attr src "pattern.v:55"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst5.inst3_O I1=inst6.inst3_O I2=inst0.inst1.inst1_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst11.inst3_O COUT=
+.attr loc "7,11/0"
+.attr src "pattern.v:56"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst5.inst4_O I1=inst6.inst4_O I2=inst0.inst1.inst1_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst11.inst4_O COUT=
+.attr loc "6,9/1"
+.attr src "pattern.v:57"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst5.inst5_O I1=inst6.inst5_O I2=inst0.inst1.inst1_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst11.inst5_O COUT=
+.attr loc "7,6/7"
+.attr src "pattern.v:58"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst5.inst6_O I1=inst6.inst6_O I2=inst0.inst1.inst1_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst11.inst6_O COUT=
+.attr loc "9,11/6"
+.attr src "pattern.v:59"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst5.inst7_O I1=inst6.inst7_O I2=inst0.inst1.inst1_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst11.inst7_O COUT=
+.attr loc "6,7/5"
+.attr src "pattern.v:60"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst7.inst0_O I1=inst8.inst0_O I2=inst0.inst1.inst1_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst12.inst0_O COUT=
+.attr loc "9,7/5"
+.attr src "pattern.v:53"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst7.inst1_O I1=inst8.inst1_O I2=inst0.inst1.inst1_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst12.inst1_O COUT=
+.attr loc "5,8/3"
+.attr src "pattern.v:54"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst7.inst2_O I1=inst8.inst2_O I2=inst0.inst1.inst1_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst12.inst2_O COUT=
+.attr loc "8,10/2"
+.attr src "pattern.v:55"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst7.inst3_O I1=inst8.inst3_O I2=inst0.inst1.inst1_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst12.inst3_O COUT=
+.attr loc "7,11/7"
+.attr src "pattern.v:56"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst7.inst4_O I1=inst8.inst4_O I2=inst0.inst1.inst1_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst12.inst4_O COUT=
+.attr loc "5,9/3"
+.attr src "pattern.v:57"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst7.inst5_O I1=inst8.inst5_O I2=inst0.inst1.inst1_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst12.inst5_O COUT=
+.attr loc "7,7/1"
+.attr src "pattern.v:58"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst7.inst6_O I1=inst8.inst6_O I2=inst0.inst1.inst1_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst12.inst6_O COUT=
+.attr loc "8,9/3"
+.attr src "pattern.v:59"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst7.inst7_O I1=inst8.inst7_O I2=inst0.inst1.inst1_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst12.inst7_O COUT=
+.attr loc "5,7/5"
+.attr src "pattern.v:60"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst9.inst0_O I1=inst10.inst0_O I2=inst0.inst1.inst2_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst13.inst0_O COUT=
+.attr loc "8,6/5"
+.attr src "pattern.v:53"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst9.inst1_O I1=inst10.inst1_O I2=inst0.inst1.inst2_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst13.inst1_O COUT=
+.attr loc "6,8/3"
+.attr src "pattern.v:54"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst9.inst2_O I1=inst10.inst2_O I2=inst0.inst1.inst2_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst13.inst2_O COUT=
+.attr loc "5,10/2"
+.attr src "pattern.v:55"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst9.inst3_O I1=inst10.inst3_O I2=inst0.inst1.inst2_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst13.inst3_O COUT=
+.attr loc "7,10/7"
+.attr src "pattern.v:56"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst9.inst4_O I1=inst10.inst4_O I2=inst0.inst1.inst2_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst13.inst4_O COUT=
+.attr loc "7,9/0"
+.attr src "pattern.v:57"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst9.inst5_O I1=inst10.inst5_O I2=inst0.inst1.inst2_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst13.inst5_O COUT=
+.attr loc "6,6/0"
+.attr src "pattern.v:58"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst9.inst6_O I1=inst10.inst6_O I2=inst0.inst1.inst2_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst13.inst6_O COUT=
+.attr loc "8,9/5"
+.attr src "pattern.v:59"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst9.inst7_O I1=inst10.inst7_O I2=inst0.inst1.inst2_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst13.inst7_O COUT=
+.attr loc "6,8/4"
+.attr src "pattern.v:60"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst11.inst0_O I1=inst12.inst0_O I2=inst0.inst1.inst2_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst14.inst0_O COUT=
+.attr loc "8,7/3"
+.attr src "pattern.v:53"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst11.inst1_O I1=inst12.inst1_O I2=inst0.inst1.inst2_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst14.inst1_O COUT=
+.attr loc "5,8/1"
+.attr src "pattern.v:54"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst11.inst2_O I1=inst12.inst2_O I2=inst0.inst1.inst2_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst14.inst2_O COUT=
+.attr loc "8,10/1"
+.attr src "pattern.v:55"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst11.inst3_O I1=inst12.inst3_O I2=inst0.inst1.inst2_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst14.inst3_O COUT=
+.attr loc "7,11/4"
+.attr src "pattern.v:56"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst11.inst4_O I1=inst12.inst4_O I2=inst0.inst1.inst2_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst14.inst4_O COUT=
+.attr loc "6,9/5"
+.attr src "pattern.v:57"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst11.inst5_O I1=inst12.inst5_O I2=inst0.inst1.inst2_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst14.inst5_O COUT=
+.attr loc "7,7/4"
+.attr src "pattern.v:58"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst11.inst6_O I1=inst12.inst6_O I2=inst0.inst1.inst2_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst14.inst6_O COUT=
+.attr loc "8,9/0"
+.attr src "pattern.v:59"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst11.inst7_O I1=inst12.inst7_O I2=inst0.inst1.inst2_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst14.inst7_O COUT=
+.attr loc "6,7/3"
+.attr src "pattern.v:60"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst13.inst0_O I1=inst14.inst0_O I2=inst0.inst1.inst3_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst15.inst0_O COUT=
+.attr loc "8,7/6"
+.attr src "pattern.v:53"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst13.inst1_O I1=inst14.inst1_O I2=inst0.inst1.inst3_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst15.inst1_O COUT=
+.attr loc "6,8/0"
+.attr src "pattern.v:54"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst13.inst2_O I1=inst14.inst2_O I2=inst0.inst1.inst3_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst15.inst2_O COUT=
+.attr loc "7,10/1"
+.attr src "pattern.v:55"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst13.inst3_O I1=inst14.inst3_O I2=inst0.inst1.inst3_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst15.inst3_O COUT=
+.attr loc "7,10/0"
+.attr src "pattern.v:56"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst13.inst4_O I1=inst14.inst4_O I2=inst0.inst1.inst3_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst15.inst4_O COUT=
+.attr loc "7,9/1"
+.attr src "pattern.v:57"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst13.inst5_O I1=inst14.inst5_O I2=inst0.inst1.inst3_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst15.inst5_O COUT=
+.attr loc "7,7/6"
+.attr src "pattern.v:58"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst13.inst6_O I1=inst14.inst6_O I2=inst0.inst1.inst3_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst15.inst6_O COUT=
+.attr loc "8,9/7"
+.attr src "pattern.v:59"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst13.inst7_O I1=inst14.inst7_O I2=inst0.inst1.inst3_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst15.inst7_O COUT=
+.attr loc "6,8/2"
+.attr src "pattern.v:60"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst20.inst11_CO I1=$false I2=$false I3=$false CIN= CLK= CEN= SR= LO= O=inst18_O COUT=
+.attr loc "8,13/5"
+.attr src "pattern.v:323"
+.param LUT_INIT 0101010101010101
+.gate ICESTORM_LC I0=$false I1=$false I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst2.inst0_O COUT=
+.attr loc "8,6/0"
+.attr src "pattern.v:53"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$false I1=$false I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst2.inst1_O COUT=
+.attr loc "5,8/4"
+.attr src "pattern.v:54"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$true$2 I1=$true$2 I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst2.inst2_O COUT=
+.attr loc "5,10/5"
+.attr src "pattern.v:55"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$true$2 I1=$true$2 I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst2.inst3_O COUT=
+.attr loc "6,11/7"
+.attr src "pattern.v:56"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$false I1=$false I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst2.inst4_O COUT=
+.attr loc "7,9/3"
+.attr src "pattern.v:57"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$true$2 I1=$true$2 I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst2.inst5_O COUT=
+.attr loc "5,6/4"
+.attr src "pattern.v:58"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$true$2 I1=$true$2 I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst2.inst6_O COUT=
+.attr loc "9,9/2"
+.attr src "pattern.v:59"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$false I1=$false I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst2.inst7_O COUT=
+.attr loc "6,8/7"
+.attr src "pattern.v:60"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst23.inst11_CO I1=$false I2=$false I3=$false CIN= CLK= CEN= SR= LO= O=inst21_O COUT=
+.attr loc "7,4/1"
+.attr src "pattern.v:326"
+.param LUT_INIT 0101010101010101
+.gate ICESTORM_LC I0=inst24.inst0.inst1_CO I1=inst24.inst1.inst1_Q I2=inst24.inst1.inst2_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst25_O COUT=
+.attr loc "9,13/5"
+.attr src "pattern.v:330"
+.param LUT_INIT 0000000010000000
+.gate ICESTORM_LC I0=inst25_O I1=inst26_Q I2=$false I3=$false CIN= CLK= CEN= SR= LO= O=inst24.inst1.RESET COUT=
+.attr loc "8,13/6"
+.attr src "pattern.v:333"
+.param LUT_INIT 0010001000100010
+.gate ICESTORM_LC I0=$true$2 I1=$false I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst3.inst0_O COUT=
+.attr loc "8,6/1"
+.attr src "pattern.v:53"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$true$2 I1=$false I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst3.inst1_O COUT=
+.attr loc "9,8/7"
+.attr src "pattern.v:54"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$true$2 I1=$true$2 I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst3.inst2_O COUT=
+.attr loc "5,11/1"
+.attr src "pattern.v:55"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$true$2 I1=$true$2 I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst3.inst3_O COUT=
+.attr loc "7,10/5"
+.attr src "pattern.v:56"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$false I1=$false I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst3.inst4_O COUT=
+.attr loc "7,9/4"
+.attr src "pattern.v:57"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$true$2 I1=$true$2 I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst3.inst5_O COUT=
+.attr loc "6,6/4"
+.attr src "pattern.v:58"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$true$2 I1=$false I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst3.inst6_O COUT=
+.attr loc "9,9/1"
+.attr src "pattern.v:59"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$false I1=$false I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst3.inst7_O COUT=
+.attr loc "6,7/1"
+.attr src "pattern.v:60"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst18_O I1=inst26_Q I2=$false I3=$false CIN= CLK= CEN= SR= LO= O=inst29.LOAD COUT=
+.attr loc "8,12/6"
+.attr src "pattern.v:335"
+.param LUT_INIT 0010001000100010
+.gate ICESTORM_LC I0=inst29.inst8.inst7_Q I1=inst21_O I2=$false I3=$false CIN= CLK= CEN= SR= LO= O=inst31_O COUT=
+.attr loc "7,1/7"
+.attr src "pattern.v:336"
+.param LUT_INIT 1000100010001000
+.gate ICESTORM_LC I0=inst26_Q I1=inst16.inst0.inst7_CO$3 I2=$false I3=$false CIN= CLK= CEN= SR= LO= O=inst0.inst1.CE COUT=
+.attr loc "8,12/4"
+.attr src "pattern.v:337"
+.param LUT_INIT 0100010001000100
+.gate ICESTORM_LC I0=$false I1=$true$2 I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst4.inst0_O COUT=
+.attr loc "8,6/7"
+.attr src "pattern.v:53"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$false I1=$true$2 I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst4.inst1_O COUT=
+.attr loc "11,8/7"
+.attr src "pattern.v:54"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$false I1=$true$2 I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst4.inst2_O COUT=
+.attr loc "5,11/4"
+.attr src "pattern.v:55"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$false I1=$false I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst4.inst3_O COUT=
+.attr loc "7,10/2"
+.attr src "pattern.v:56"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$false I1=$true$2 I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst4.inst4_O COUT=
+.attr loc "7,9/6"
+.attr src "pattern.v:57"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$true$2 I1=$true$2 I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst4.inst5_O COUT=
+.attr loc "6,6/1"
+.attr src "pattern.v:58"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$false I1=$true$2 I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst4.inst6_O COUT=
+.attr loc "9,9/3"
+.attr src "pattern.v:59"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$false I1=$false I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst4.inst7_O COUT=
+.attr loc "6,7/6"
+.attr src "pattern.v:60"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$true$2 I1=$false I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst5.inst0_O COUT=
+.attr loc "8,8/7"
+.attr src "pattern.v:53"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$true$2 I1=$true$2 I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst5.inst1_O COUT=
+.attr loc "5,8/6"
+.attr src "pattern.v:54"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$true$2 I1=$false I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst5.inst2_O COUT=
+.attr loc "9,10/2"
+.attr src "pattern.v:55"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$true$2 I1=$false I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst5.inst3_O COUT=
+.attr loc "7,11/5"
+.attr src "pattern.v:56"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$false I1=$true$2 I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst5.inst4_O COUT=
+.attr loc "6,9/3"
+.attr src "pattern.v:57"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$true$2 I1=$true$2 I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst5.inst5_O COUT=
+.attr loc "7,6/0"
+.attr src "pattern.v:58"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$true$2 I1=$true$2 I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst5.inst6_O COUT=
+.attr loc "11,11/1"
+.attr src "pattern.v:59"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$false I1=$false I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst5.inst7_O COUT=
+.attr loc "6,7/0"
+.attr src "pattern.v:60"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$false I1=$false I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst6.inst0_O COUT=
+.attr loc "8,8/2"
+.attr src "pattern.v:53"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$false I1=$false I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst6.inst1_O COUT=
+.attr loc "5,8/5"
+.attr src "pattern.v:54"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$true$2 I1=$true$2 I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst6.inst2_O COUT=
+.attr loc "11,10/4"
+.attr src "pattern.v:55"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$true$2 I1=$false I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst6.inst3_O COUT=
+.attr loc "7,11/3"
+.attr src "pattern.v:56"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$false I1=$false I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst6.inst4_O COUT=
+.attr loc "6,9/7"
+.attr src "pattern.v:57"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$true$2 I1=$true$2 I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst6.inst5_O COUT=
+.attr loc "7,6/3"
+.attr src "pattern.v:58"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$true$2 I1=$true$2 I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst6.inst6_O COUT=
+.attr loc "9,11/5"
+.attr src "pattern.v:59"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$false I1=$false I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst6.inst7_O COUT=
+.attr loc "6,7/7"
+.attr src "pattern.v:60"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$false I1=$false I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst7.inst0_O COUT=
+.attr loc "9,7/0"
+.attr src "pattern.v:53"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$false I1=$false I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst7.inst1_O COUT=
+.attr loc "5,8/2"
+.attr src "pattern.v:54"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$false I1=$false I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst7.inst2_O COUT=
+.attr loc "8,10/4"
+.attr src "pattern.v:55"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$false I1=$false I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst7.inst3_O COUT=
+.attr loc "7,11/6"
+.attr src "pattern.v:56"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$false I1=$false I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst7.inst4_O COUT=
+.attr loc "5,9/0"
+.attr src "pattern.v:57"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$true$2 I1=$true$2 I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst7.inst5_O COUT=
+.attr loc "7,7/2"
+.attr src "pattern.v:58"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$false I1=$false I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst7.inst6_O COUT=
+.attr loc "8,9/1"
+.attr src "pattern.v:59"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$false I1=$false I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst7.inst7_O COUT=
+.attr loc "5,7/1"
+.attr src "pattern.v:60"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$true$2 I1=$false I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst8.inst0_O COUT=
+.attr loc "9,7/3"
+.attr src "pattern.v:53"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$false I1=$true$2 I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst8.inst1_O COUT=
+.attr loc "2,8/2"
+.attr src "pattern.v:54"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$true$2 I1=$false I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst8.inst2_O COUT=
+.attr loc "8,10/0"
+.attr src "pattern.v:55"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$true$2 I1=$true$2 I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst8.inst3_O COUT=
+.attr loc "7,11/2"
+.attr src "pattern.v:56"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$false I1=$false I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst8.inst4_O COUT=
+.attr loc "5,9/6"
+.attr src "pattern.v:57"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$false I1=$false I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst8.inst5_O COUT=
+.attr loc "7,7/3"
+.attr src "pattern.v:58"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$false I1=$false I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst8.inst6_O COUT=
+.attr loc "8,9/2"
+.attr src "pattern.v:59"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$false I1=$false I2=inst0.inst0.inst1_CO I3=$false CIN= CLK= CEN= SR= LO= O=inst8.inst7_O COUT=
+.attr loc "5,7/0"
+.attr src "pattern.v:60"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst1.inst0_O I1=inst2.inst0_O I2=inst0.inst1.inst1_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst9.inst0_O COUT=
+.attr loc "8,6/6"
+.attr src "pattern.v:53"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst1.inst1_O I1=inst2.inst1_O I2=inst0.inst1.inst1_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst9.inst1_O COUT=
+.attr loc "5,8/7"
+.attr src "pattern.v:54"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst1.inst2_O I1=inst2.inst2_O I2=inst0.inst1.inst1_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst9.inst2_O COUT=
+.attr loc "5,10/0"
+.attr src "pattern.v:55"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst1.inst3_O I1=inst2.inst3_O I2=inst0.inst1.inst1_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst9.inst3_O COUT=
+.attr loc "6,11/3"
+.attr src "pattern.v:56"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst1.inst4_O I1=inst2.inst4_O I2=inst0.inst1.inst1_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst9.inst4_O COUT=
+.attr loc "7,9/7"
+.attr src "pattern.v:57"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst1.inst5_O I1=inst2.inst5_O I2=inst0.inst1.inst1_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst9.inst5_O COUT=
+.attr loc "5,6/6"
+.attr src "pattern.v:58"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst1.inst6_O I1=inst2.inst6_O I2=inst0.inst1.inst1_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst9.inst6_O COUT=
+.attr loc "9,9/6"
+.attr src "pattern.v:59"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=inst1.inst7_O I1=inst2.inst7_O I2=inst0.inst1.inst1_Q I3=$false CIN= CLK= CEN= SR= LO= O=inst9.inst7_O COUT=
+.attr loc "6,8/5"
+.attr src "pattern.v:60"
+.param LUT_INIT 1100101011001010
+.gate ICESTORM_LC I0=$false I1=inst0.inst0.inst1_CO I2=$false I3=$false CIN=$true CLK= CEN= SR= LO= O= COUT=inst0.inst0.inst1_CO$2
+.attr loc "8,11/0"
+.param CARRY_ENABLE 1
+.gate ICESTORM_LC I0= I1=inst0.inst1.inst1_Q I2=$false I3= CIN=inst0.inst0.inst1_CO$2 CLK= CEN= SR= LO= O= COUT=inst0.inst0.inst3_CO
+.attr loc "8,11/1"
+.param CARRY_ENABLE 1
+.gate ICESTORM_LC I0=$false I1=inst16.inst0.inst1_CO I2=$false I3=$false CIN=$true CLK= CEN= SR= LO= O= COUT=inst16.inst0.inst1_CO$2
+.attr loc "1,3/0"
+.param CARRY_ENABLE 1
+.gate ICESTORM_LC I0= I1=inst16.inst1.inst1_Q I2=$false I3= CIN=inst16.inst0.inst1_CO$2 CLK= CEN= SR= LO= O= COUT=inst16.inst0.inst3_CO
+.attr loc "1,3/1"
+.param CARRY_ENABLE 1
+.gate ICESTORM_LC I0= I1= I2= I3=inst16.inst0.inst7_CO$2 CIN= CLK= CEN= SR= LO= O=inst16.inst0.inst7_CO COUT=
+.attr loc "1,3/4"
+.param LUT_INIT 1111111100000000
+.gate ICESTORM_LC I0=$false I1=inst17.inst0.inst1_CO I2=$false I3=$false CIN=$true CLK= CEN= SR= LO= O= COUT=inst17.inst0.inst1_CO$2
+.attr loc "7,13/0"
+.param CARRY_ENABLE 1
+.gate ICESTORM_LC I0= I1=inst17.inst1.inst1_Q I2=$false I3= CIN=inst17.inst0.inst1_CO$2 CLK= CEN= SR= LO= O= COUT=inst17.inst0.inst3_CO
+.attr loc "7,13/1"
+.param CARRY_ENABLE 1
+.gate ICESTORM_LC I0=$false I1=inst17.inst1.inst3_Q I2=$false I3=$false CIN=$true CLK= CEN= SR= LO= O= COUT=inst17.inst1.inst3_Q$2
+.attr loc "8,13/0"
+.param CARRY_ENABLE 1
+.gate ICESTORM_LC I0= I1=inst17.inst1.inst4_Q I2=$false I3= CIN=inst17.inst1.inst3_Q$2 CLK= CEN= SR= LO= O= COUT=inst20.inst9_CO
+.attr loc "8,13/1"
+.param CARRY_ENABLE 1
+.gate ICESTORM_LC I0= I1=inst17.inst1.inst5_Q I2=$true$2 I3= CIN=inst20.inst9_CO CLK= CEN= SR= LO= O= COUT=inst20.inst11_CO$2
+.attr loc "8,13/2"
+.param CARRY_ENABLE 1
+.gate ICESTORM_LC I0= I1= I2= I3=inst20.inst11_CO$2 CIN= CLK= CEN= SR= LO= O=inst20.inst11_CO COUT=
+.attr loc "8,13/3"
+.param LUT_INIT 1111111100000000
+.gate ICESTORM_LC I0=$false I1=inst17.inst0.inst1_CO I2=$false I3=$false CIN=$true CLK= CEN= SR= LO= O= COUT=inst17.inst0.inst1_CO$3
+.attr loc "7,12/0"
+.param CARRY_ENABLE 1
+.gate ICESTORM_LC I0= I1=inst17.inst1.inst1_Q I2=$true$2 I3= CIN=inst17.inst0.inst1_CO$3 CLK= CEN= SR= LO= O= COUT=inst23.inst3_CO
+.attr loc "7,12/1"
+.param CARRY_ENABLE 1
+.gate ICESTORM_LC I0= I1=inst17.inst1.inst2_Q I2=$true$2 I3= CIN=inst23.inst3_CO CLK= CEN= SR= LO= O= COUT=inst23.inst5_CO
+.attr loc "7,12/2"
+.param CARRY_ENABLE 1
+.gate ICESTORM_LC I0= I1=inst17.inst1.inst3_Q I2=$false I3= CIN=inst23.inst5_CO CLK= CEN= SR= LO= O= COUT=inst23.inst7_CO
+.attr loc "7,12/3"
+.param CARRY_ENABLE 1
+.gate ICESTORM_LC I0= I1=inst17.inst1.inst4_Q I2=$false I3= CIN=inst23.inst7_CO CLK= CEN= SR= LO= O= COUT=inst23.inst9_CO
+.attr loc "7,12/4"
+.param CARRY_ENABLE 1
+.gate ICESTORM_LC I0= I1=inst17.inst1.inst5_Q I2=$true$2 I3= CIN=inst23.inst9_CO CLK= CEN= SR= LO= O= COUT=inst23.inst11_CO$2
+.attr loc "7,12/5"
+.param CARRY_ENABLE 1
+.gate ICESTORM_LC I0= I1= I2= I3=inst23.inst11_CO$2 CIN= CLK= CEN= SR= LO= O=inst23.inst11_CO COUT=
+.attr loc "7,12/6"
+.param LUT_INIT 1111111100000000
+.gate ICESTORM_LC I0=$false I1=inst24.inst0.inst1_CO I2=$false I3=$false CIN=$true CLK= CEN= SR= LO= O= COUT=inst24.inst0.inst1_CO$2
+.attr loc "9,14/0"
+.param CARRY_ENABLE 1
+.gate ICESTORM_LC I0= I1=inst24.inst1.inst1_Q I2=$false I3= CIN=inst24.inst0.inst1_CO$2 CLK= CEN= SR= LO= O= COUT=inst24.inst0.inst3_CO
+.attr loc "9,14/1"
+.param CARRY_ENABLE 1
+.gate SB_GB USER_SIGNAL_TO_GLOBAL_BUFFER=CLKIN$2 GLOBAL_BUFFER_OUTPUT=CLKIN$2$2
+.attr loc "0,8/2"
+.gate SB_GB USER_SIGNAL_TO_GLOBAL_BUFFER=inst16.inst0.inst7_CO GLOBAL_BUFFER_OUTPUT=inst16.inst0.inst7_CO$3
+.attr loc "6,0/2"
+.gate ICESTORM_LC I0=$false I1=$false I2=$false I3=$false CIN= CLK= CEN= SR= LO= O=$true$2 COUT=
+.attr loc "4,11/1"
+.param LUT_INIT 0000000000000001
+.end
