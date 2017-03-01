@@ -1,8 +1,8 @@
 {
     ".deps_version": 2, 
-    "python pattern.py build/pattern": {
-        "build/pattern.pcf": "output-2f7c3ab214bb7278eab7856dfc06806d", 
-        "build/pattern.v": "output-9c459fc842e80b3777da5b8c701372ff", 
-        "pattern.py": "input-ffa813e86fe75863a3d539009c9a4348"
+    "python ws2811.py build/ws2811": {
+        "build/ws2811.pcf": "output-2f7c3ab214bb7278eab7856dfc06806d", 
+        "build/ws2811.v": "output-d8c22c56bf4353ea8984206498c68182", 
+        "ws2811.py": "input-9065f202547721507e07c0887b7aef9c"
     }
 }

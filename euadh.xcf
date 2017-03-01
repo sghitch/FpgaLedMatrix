@@ -17,11 +17,12 @@
 				<BScanLen>1</BScanLen>
 				<BScanVal>0</BScanVal>
 			</Bypass>
-			<File>C:/Users/steph/Source/Repos/CS448H/magma/blink/build/blink.bin</File>
-			<FileTime>02/01/17 22:38:52</FileTime>
+			<File>C:/Users/steph/Source/Repos/FpgaLedMatrix/WS2811/build/ws2811.bin</File>
+			<FileTime>02/28/17 14:25:08</FileTime>
 			<Operation>SPI Flash Erase,Program,Verify</Operation>
 			<Option>
 				<SVFVendor>JTAG STANDARD</SVFVendor>
+				<SVFProcessor>SVF Processor</SVFProcessor>
 				<AccessMode>SPI Flash Programming</AccessMode>
 			</Option>
 			<FPGALoader>
@@ -44,6 +45,7 @@
 					<Option>
 						<SVFVendor>JTAG STANDARD</SVFVendor>
 						<IOState>HighZ</IOState>
+						<SVFProcessor>SVF Processor</SVFProcessor>
 						<AccessMode>JTAG</AccessMode>
 					</Option>
 				</Device>
@@ -57,9 +59,9 @@
 					<IDCode>0x16</IDCode>
 					<Package>8-pin VDFPN8</Package>
 					<Operation>SPI Flash Erase,Program,Verify</Operation>
-					<File>C:/Users/steph/Source/Repos/CS448H/magma/blink/build/blink.bin</File>
+					<File>C:/Users/steph/Source/Repos/FpgaLedMatrix/WS2811/build/ws2811.bin</File>
 					<AddressBase>0x00000000</AddressBase>
-					<EndAddress>0x003F0000</EndAddress>
+					<EndAddress>0x00010000</EndAddress>
 					<DeviceSize>32</DeviceSize>
 					<DataSize>32220</DataSize>
 					<NumberOfDevices>1</NumberOfDevices>
@@ -78,6 +80,7 @@
 					</LocalChainList>
 					<Option>
 						<SVFVendor>JTAG STANDARD</SVFVendor>
+						<SVFProcessor>SVF Processor</SVFProcessor>
 					</Option>
 				</Device>
 			</FPGADevice>
@@ -97,6 +100,6 @@
 	<CableOptions>
 		<CableName>USB2</CableName>
 		<PortAdd>FTUSB-0</PortAdd>
-		<USBID>Lattice FTUSB Interface Cable A Location 0000</USBID>
+		<USBID>Lattice FTUSB Interface Cable A Location 0000 Serial A</USBID>
 	</CableOptions>
 </ispXCF>

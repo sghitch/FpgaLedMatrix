@@ -1,32 +1,22 @@
-NAME = pattern
-PNR=arachne-pnr
+#NAME = baud
+#NAME = fsm
+#NAME = uart
+NAME = ws2811
 
-DEVICE = 1k
 PCF = $(NAME).pcf
 
+DEVICE = 1k
 QUIET = -q
 
-all: $(NAME).bin
-
-%.bin: %.txt
-	icepack $< $@
-
-%.txt: %.blif
-	$(PNR) $(QUIET) -d $(DEVICE) --post-place-blif $*.place.blif -o $@ -p $(PCF) $< 
-
-%.blif: %.v
-	yosys $(QUIET) -p 'synth_ice40 -top main -blif $@' $<
+$(NAME).bin: $(NAME).v $(PCF)
+	yosys $(QUIET) -p 'synth_ice40 -top main -blif $(NAME).blif' $(NAME).v
+	arachne-pnr $(QUIET) -d $(DEVICE) -o $(NAME).txt -p $(PCF) $(NAME).blif
+	icepack $(NAME).txt $(NAME).bin
 
 upload: $(NAME).bin
-	iceprog $<
-
-explain: $(NAME).txt
-	icebox_explain $<
+	iceprog $(NAME).bin
 
 clean:
 	rm -f *.bin *.txt *.blif *.rpt
-
-
-.PRECIOUS: %.bin %.txt %.blif 
 
 .PHONY: all explain install clean
