@@ -1,7 +1,10 @@
+set_io D4 113
+set_io D5 114
+set_io D6 115
+set_io D7 116
 set_io I 91
-set_io J3[4] 48
-set_io J3[3] 56
-set_io J3[2] 60
-set_io J3[1] 61
-set_io J3[0] 62
+set_io D3 48
+set_io D2 56
+set_io D1 60
+set_io D0 61
 set_io CLKIN 21

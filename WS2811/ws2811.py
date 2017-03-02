@@ -4,6 +4,7 @@ import math
 import colorsys
 from magma import *
 from mantle import *
+from parts.lattice.ice40.primitives.RAMB import RAMB
 from boards.icestick import IceStick
 
 #Necessary ROM Infrastructure (based off of UART.py from lecture)
@@ -71,11 +72,16 @@ def RUN(enable, baud):
 
     return run
 
-
 icestick = IceStick()
 icestick.Clock.on()
-for i in range(5):
-    icestick.J3[i].output().on()
+icestick.J3[1].rename('D0').output().on()
+icestick.J3[2].rename('D1').output().on()
+icestick.J3[3].rename('D2').output().on()
+icestick.J3[4].rename('D3').output().on()
+icestick.J1[1].rename('D4').output().on()
+icestick.J1[2].rename('D5').output().on()
+icestick.J1[3].rename('D6').output().on()
+icestick.J1[4].rename('D7').output().on()
 icestick.PMOD1[3].output().rename('I').on()
 
 main = icestick.main()
@@ -83,53 +89,97 @@ main = icestick.main()
 clock = Counter(4, cout=True, incr=1)
 baud = clock.COUT
 
-num_led = 42
-num_bytes = int(math.pow(2, math.ceil(math.log((num_led * 3), 2)))) - 1
-size = int(math.ceil(math.log(num_bytes + 8, 2))) 
+# num_led = 42
+# num_bytes = int(math.pow(2, math.ceil(math.log((num_led * 3), 2)))) - 1
+# size = int(math.ceil(math.log(num_bytes + 8, 2))) 
 
-colorList = []
-for i in range(num_led):
-    color = colorsys.hls_to_rgb(i * (1.0/50), 0.25, 1)
-    for j in range(3):
-        colorList.append(int(color[j] * 255))
+# colorList = []
+# for i in range(num_led):
+#     color = colorsys.hls_to_rgb(i * (1.0/50), 0.25, 1)
+#     for j in range(3):
+#         colorList.append(int(color[j] * 255))
 
-for i in range(num_bytes - (num_led * 3) + 1):
-    colorList.append(0)
+# for i in range(num_bytes - (num_led * 3) + 1):
+#     colorList.append(0)
+
+N = 8
+M = 4096/N
+rom = range(M)
+for i in range(M):
+    rom[i] = 0xff
+
+ramb = RAMB( rom )
+#RADDR = array(0,0,0,0,0,0,0,0,0)
+RADDR = Counter(8, cout = True)
+O = array(main.D0, main.D1, main.D2, main.D3, main.D4, main.D5, main.D6, main.D7)
+
+wire( 1, ramb.RE    )
+wire( 1, ramb.RCLKE )
+wire( RADDR, ramb.RADDR )
+wire( ramb.RDATA, O)
+
+#-------------------------------------
+# WDATA = array(main.I0, main.I1, 0, 0, 0, 0, 0, 0)
+# WADDR = array(main.I2, main.I3, 0,0,0,0,0,0,0)
+# RADDR = array(main.I4, main.I5, 0,0,0,0,0,0,0)
+# WE = main.I6
+# O = array(main.D0, main.D1)
+
+
+# N = 8
+# M = 4096/N
+# rom = range(M)
+# for i in range(M):
+#     rom[i] = i & 0xff
+
+# ramb = RAMB( rom )
+# #print(romb.interface)
+
+# wire( WE, ramb.WE    )
+# wire( 1, ramb.WCLKE )
+# wire( WADDR, ramb.WADDR )
+# wire( WDATA, ramb.WDATA )
+
+# wire( 1, ramb.RE    )
+# wire( 1, ramb.RCLKE )
+# wire( RADDR, ramb.RADDR )
+# wire( ramb.RDATA[0:2], O)
+#-------------------------------------
 
 #Make sure values contains num_bytes + 1 entries
-values = __builtin__.tuple(colorList)
-#values = __builtin__.tuple((255,0,0,255,128,64,0,0,255,255,0,0,255,128,64,0,0,255,255,0,0,255,128,64,0,0,255,255,0,0,255,128,64,0,0,255,255,0,0,255,128,64,0,0,255,255,0,0,255,128,64,0,0,255,255,0,0,255,128,64,0,0,255,255,0,0,255,128,64,0,0,255,255,0,0,255,128,64,0,0,255,255,0,0,255,128,64,0,0,255,255,0,0,255,128,64,0,0,255,255,0,0,255,128,64,0,0,255,255,0,0,255,128,64,0,0,255,255,0,0,255,128,64,0,0,255,255,0))
-init = [array(*int2seq(v, 8)) for v in values]
-print (len(init))
+# values = __builtin__.tuple(colorList)
+# #values = __builtin__.tuple((255,0,0,255,128,64,0,0,255,255,0,0,255,128,64,0,0,255,255,0,0,255,128,64,0,0,255,255,0,0,255,128,64,0,0,255,255,0,0,255,128,64,0,0,255,255,0,0,255,128,64,0,0,255,255,0,0,255,128,64,0,0,255,255,0,0,255,128,64,0,0,255,255,0,0,255,128,64,0,0,255,255,0,0,255,128,64,0,0,255,255,0,0,255,128,64,0,0,255,255,0,0,255,128,64,0,0,255,255,0,0,255,128,64,0,0,255,255,0,0,255,128,64,0,0,255,255,0))
+# init = [array(*int2seq(v, 8)) for v in values]
+# print (len(init))
 
-printf = Counter(size-1, ce=True)
-rom = ROM(size-1, init, printf.O)
+# printf = Counter(size-1, ce=True)
+# rom = ROM(size-1, init, printf.O)
 
-data = array(rom.O[0], rom.O[1], rom.O[2], rom.O[3],
-             rom.O[4], rom.O[5], rom.O[6], rom.O[7])
+# data = array(rom.O[0], rom.O[1], rom.O[2], rom.O[3],
+#              rom.O[4], rom.O[5], rom.O[6], rom.O[7])
 
-payloadCounter = PAYLOAD_TIMER(size, baud)
-payloadComp = UGT(size)(I0=array(*int2seq(num_bytes, size)), I1=payloadCounter)
-dataMask = DFF(ce=True)(I=payloadComp, ce=baud)
+# payloadCounter = PAYLOAD_TIMER(size, baud)
+# payloadComp = UGT(size)(I0=array(*int2seq(num_bytes, size)), I1=payloadCounter)
+# dataMask = DFF(ce=True)(I=payloadComp, ce=baud)
 
-run = RUN(payloadComp, baud)
-shift = PISO(8, ce=True)
-load = LUT2(I0&~I1)(payloadComp,run)
-shift(1,data,load)
-wire(baud, shift.CE)
+# run = RUN(payloadComp, baud)
+# shift = PISO(8, ce=True)
+# load = LUT2(I0&~I1)(payloadComp,run)
+# shift(1,data,load)
+# wire(baud, shift.CE)
 
-readyShift = LUT2(~I0 & I1)(run, baud)
-wire(readyShift, printf.CE)
+# readyShift = LUT2(~I0 & I1)(run, baud)
+# wire(readyShift, printf.CE)
 
-signal = WS2811_STREAM(shift, dataMask, clock)
+# signal = WS2811_STREAM(shift, dataMask, clock)
 
 
-wire(0,			            main.J3[0])
-wire(baud,                  main.J3[1])
-wire(dataMask,      main.J3[2])
-wire(run,                 main.J3[3])
-wire(signal,                main.J3[4])
-wire(signal,                main.I)
+# wire(0,			            main.J3[0])
+# wire(baud,                  main.J3[1])
+# wire(dataMask,      main.J3[2])
+# wire(run,                 main.J3[3])
+# wire(signal,                main.J3[4])
+# wire(signal,                main.I)
 
 compile(sys.argv[1], main)
 
