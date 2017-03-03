@@ -51,11 +51,31 @@ def WS2811_STREAM(data, mask, clock):
     BitSelect = Mux(2,4)
     BitSelect(I0=LowVal, I1=HighVal, S=Select)
 
-    CompVar = UGT(4);
+    CompVar = UGT(4)
     CompVar(I0=BitSelect.O, I1=clock)
 
     signal = And2()(I0 = CompVar, I1=mask)
     return signal
+
+def EDGE_DETECT(signal):
+    edgeFlipFlop = DFF(init=0, ce=False, r=False, s=False)
+    edgeFlipFlop(I=signal)
+
+    edgeNot = Not()(edgeFlipFlop.O)
+    edgeAnd = And2()(I0=edgeNot, I1=signal)
+
+    return edgeAnd
+
+def RAM_ADVANCE(n, enable, run, baud):
+    nextByte = Not()(run)
+    addrIncrement = And3()(I0=nextByte, I1=baud, I2=enable)
+
+    addrCount = Counter(9, cout = True, ce =True, r=True)
+    done = UGT(9)
+    done(I0=addrCount, I1=array(*int2seq(n, 9)))
+ 
+    addrCount(CE=addrIncrement, RESET=done)
+    return addrCount
 
 def RUN(enable, baud):
     count = Counter(3, ce=True, r=True)
@@ -89,9 +109,9 @@ main = icestick.main()
 clock = Counter(4, cout=True, incr=1)
 baud = clock.COUT
 
-# num_led = 42
-# num_bytes = int(math.pow(2, math.ceil(math.log((num_led * 3), 2)))) - 1
-# size = int(math.ceil(math.log(num_bytes + 8, 2))) 
+num_led = 2
+num_bytes = num_led * 3 - 1
+size = int(math.ceil(math.log(num_bytes + 8, 2))) 
 
 # colorList = []
 # for i in range(num_led):
@@ -105,81 +125,42 @@ baud = clock.COUT
 N = 8
 M = 4096/N
 rom = range(M)
-for i in range(M):
-    rom[i] = 0xff
+rom[0] = 255
+rom[1] = 255
+rom[2] = 255
+rom[3] = 255
 
 ramb = RAMB( rom )
-#RADDR = array(0,0,0,0,0,0,0,0,0)
-RADDR = Counter(8, cout = True)
-O = array(main.D0, main.D1, main.D2, main.D3, main.D4, main.D5, main.D6, main.D7)
+data = array(ramb.RDATA[0], ramb.RDATA[1], ramb.RDATA[2], ramb.RDATA[3],
+             ramb.RDATA[4], ramb.RDATA[5], ramb.RDATA[6], ramb.RDATA[7])
 
+payloadCounter = PAYLOAD_TIMER(size, baud)
+payloadComp = UGT(size)(I0=array(*int2seq(num_bytes, size)), I1=payloadCounter)
+dataMask = DFF(ce=True)(I=payloadComp, ce=baud)
+
+run = RUN(payloadComp, baud)
+shift = PISO(8, ce=True)
+load = LUT2(I0&~I1)(payloadComp,run)
+shift(1,data,load)
+wire(baud, shift.CE)
+readyShift = LUT2(~I0 & I1)(run, baud)
+
+RADDR = RAM_ADVANCE(num_bytes, payloadComp, run, baud)
 wire( 1, ramb.RE    )
 wire( 1, ramb.RCLKE )
-wire( RADDR, ramb.RADDR )
-wire( ramb.RDATA, O)
+wire(RADDR, ramb.RADDR )
 
-#-------------------------------------
-# WDATA = array(main.I0, main.I1, 0, 0, 0, 0, 0, 0)
-# WADDR = array(main.I2, main.I3, 0,0,0,0,0,0,0)
-# RADDR = array(main.I4, main.I5, 0,0,0,0,0,0,0)
-# WE = main.I6
-# O = array(main.D0, main.D1)
+signal = WS2811_STREAM(shift, dataMask, clock)
 
-
-# N = 8
-# M = 4096/N
-# rom = range(M)
-# for i in range(M):
-#     rom[i] = i & 0xff
-
-# ramb = RAMB( rom )
-# #print(romb.interface)
-
-# wire( WE, ramb.WE    )
-# wire( 1, ramb.WCLKE )
-# wire( WADDR, ramb.WADDR )
-# wire( WDATA, ramb.WDATA )
-
-# wire( 1, ramb.RE    )
-# wire( 1, ramb.RCLKE )
-# wire( RADDR, ramb.RADDR )
-# wire( ramb.RDATA[0:2], O)
-#-------------------------------------
-
-#Make sure values contains num_bytes + 1 entries
-# values = __builtin__.tuple(colorList)
-# #values = __builtin__.tuple((255,0,0,255,128,64,0,0,255,255,0,0,255,128,64,0,0,255,255,0,0,255,128,64,0,0,255,255,0,0,255,128,64,0,0,255,255,0,0,255,128,64,0,0,255,255,0,0,255,128,64,0,0,255,255,0,0,255,128,64,0,0,255,255,0,0,255,128,64,0,0,255,255,0,0,255,128,64,0,0,255,255,0,0,255,128,64,0,0,255,255,0,0,255,128,64,0,0,255,255,0,0,255,128,64,0,0,255,255,0,0,255,128,64,0,0,255,255,0,0,255,128,64,0,0,255,255,0))
-# init = [array(*int2seq(v, 8)) for v in values]
-# print (len(init))
-
-# printf = Counter(size-1, ce=True)
-# rom = ROM(size-1, init, printf.O)
-
-# data = array(rom.O[0], rom.O[1], rom.O[2], rom.O[3],
-#              rom.O[4], rom.O[5], rom.O[6], rom.O[7])
-
-# payloadCounter = PAYLOAD_TIMER(size, baud)
-# payloadComp = UGT(size)(I0=array(*int2seq(num_bytes, size)), I1=payloadCounter)
-# dataMask = DFF(ce=True)(I=payloadComp, ce=baud)
-
-# run = RUN(payloadComp, baud)
-# shift = PISO(8, ce=True)
-# load = LUT2(I0&~I1)(payloadComp,run)
-# shift(1,data,load)
-# wire(baud, shift.CE)
-
-# readyShift = LUT2(~I0 & I1)(run, baud)
-# wire(readyShift, printf.CE)
-
-# signal = WS2811_STREAM(shift, dataMask, clock)
-
-
-# wire(0,			            main.J3[0])
-# wire(baud,                  main.J3[1])
-# wire(dataMask,      main.J3[2])
-# wire(run,                 main.J3[3])
-# wire(signal,                main.J3[4])
-# wire(signal,                main.I)
+wire(baud,			main.D0)
+wire(RADDR.O[0],             main.D1)
+wire(RADDR.O[1],             main.D2)
+wire(RADDR.O[2],             main.D3)
+wire(payloadComp,        main.D4)
+wire(run,             main.D5)
+wire(shift,             main.D6)
+wire(signal,             main.D7)
+wire(signal,        main.I)
 
 compile(sys.argv[1], main)
 
