@@ -75,7 +75,9 @@ def RAM_ADVANCE(n, enable, run, baud):
     done(I0=addrCount, I1=array(*int2seq(n, 9)))
  
     addrCount(CE=addrIncrement, RESET=done)
-    return addrCount
+    addOne = Add(9)
+    addOne(I0=addrCount, I1=array(*int2seq(1, 9)))
+    return addOne
 
 def RUN(enable, baud):
     count = Counter(3, ce=True, r=True)
@@ -91,6 +93,12 @@ def RUN(enable, baud):
     count(CE=baud, RESET=reset)
 
     return run
+
+def UART_READER():
+    baud = CounterModM(103, 8, cout=True)
+    
+    output = array(baud.COUT,0,0,0,0,0,0,0)
+    return output
 
 icestick = IceStick()
 icestick.Clock.on()
@@ -109,26 +117,17 @@ main = icestick.main()
 clock = Counter(4, cout=True, incr=1)
 baud = clock.COUT
 
-num_led = 2
+#Don't have zero LEDS, unexpected things will happen
+num_led = 50
 num_bytes = num_led * 3 - 1
 size = int(math.ceil(math.log(num_bytes + 8, 2))) 
 
-# colorList = []
-# for i in range(num_led):
-#     color = colorsys.hls_to_rgb(i * (1.0/50), 0.25, 1)
-#     for j in range(3):
-#         colorList.append(int(color[j] * 255))
-
-# for i in range(num_bytes - (num_led * 3) + 1):
-#     colorList.append(0)
-
-N = 8
-M = 4096/N
-rom = range(M)
-rom[0] = 255
-rom[1] = 255
-rom[2] = 255
-rom[3] = 255
+#Set colors
+rom = range(512)
+for i in range(num_led):
+    color = colorsys.hls_to_rgb(i * (1.0/num_led), 0.05, 1)
+    for j in range(3):
+        rom[(i * 3) + j + 1]=(int(color[j] * 255))
 
 ramb = RAMB( rom )
 data = array(ramb.RDATA[0], ramb.RDATA[1], ramb.RDATA[2], ramb.RDATA[3],
@@ -146,20 +145,20 @@ wire(baud, shift.CE)
 readyShift = LUT2(~I0 & I1)(run, baud)
 
 RADDR = RAM_ADVANCE(num_bytes, payloadComp, run, baud)
-wire( 1, ramb.RE    )
-wire( 1, ramb.RCLKE )
-wire(RADDR, ramb.RADDR )
+ramb(RE=1, RCLKE=1, RADDR=RADDR, WE=1, WCLKE=1)
 
 signal = WS2811_STREAM(shift, dataMask, clock)
+#test = array(0,0,0,0,0,0,0,0)
+test = UART_READER()
 
-wire(baud,			main.D0)
-wire(RADDR.O[0],             main.D1)
-wire(RADDR.O[1],             main.D2)
-wire(RADDR.O[2],             main.D3)
-wire(payloadComp,        main.D4)
-wire(run,             main.D5)
-wire(shift,             main.D6)
-wire(signal,             main.D7)
+wire(test[0],	main.D0)
+wire(test[1],   main.D1)
+wire(test[2],   main.D2)
+wire(test[3],   main.D3)
+wire(test[4],   main.D4)
+wire(test[5],   main.D5)
+wire(test[6],   main.D6)
+wire(test[7],   main.D7)
 wire(signal,        main.I)
 
 compile(sys.argv[1], main)
