@@ -17,8 +17,8 @@
 				<BScanLen>1</BScanLen>
 				<BScanVal>0</BScanVal>
 			</Bypass>
-			<File>E:/Source/Repos/FpgaLedMatrix/WS2811/build/ws2811.bin</File>
-			<FileTime>03/02/17 17:55:28</FileTime>
+			<File>C:/Users/steph/Source/Repos/FpgaLedMatrix/WS2811/build/ws2811.bin</File>
+			<FileTime>03/17/17 04:57:07</FileTime>
 			<Operation>SPI Flash Erase,Program,Verify</Operation>
 			<Option>
 				<SVFVendor>JTAG STANDARD</SVFVendor>
@@ -59,7 +59,7 @@
 					<IDCode>0x16</IDCode>
 					<Package>8-pin VDFPN8</Package>
 					<Operation>SPI Flash Erase,Program,Verify</Operation>
-					<File>E:/Source/Repos/FpgaLedMatrix/WS2811/build/ws2811.bin</File>
+					<File>C:/Users/steph/Source/Repos/FpgaLedMatrix/WS2811/build/ws2811.bin</File>
 					<AddressBase>0x00000000</AddressBase>
 					<EndAddress>0x00010000</EndAddress>
 					<DeviceSize>32</DeviceSize>

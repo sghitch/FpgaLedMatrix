@@ -33,6 +33,8 @@ def ROM(logn, init, A):
 
     return muxs[n-2]
 
+
+
 def PAYLOAD_TIMER(n, baud):
     bitCount = Counter(3, ce=True, cout = True)
     bitCount(ce=baud)
@@ -66,6 +68,15 @@ def EDGE_DETECT(signal):
 
     return edgeAnd
 
+def FALLING_EDGE_DETECT(signal):
+    edgeFlipFlop = DFF(init=0, ce=False, r=False, s=False)
+    edgeFlipFlop(I=signal)
+
+    edgeNot = Not()(signal)
+    edgeAnd = And2()(I0=edgeFlipFlop.O, I1=edgeNot)
+
+    return edgeAnd
+
 def RAM_ADVANCE(n, enable, run, baud):
     nextByte = Not()(run)
     addrIncrement = And3()(I0=nextByte, I1=baud, I2=enable)
@@ -94,10 +105,30 @@ def RUN(enable, baud):
 
     return run
 
-def UART_READER():
-    baud = CounterModM(103, 8, cout=True)
+def BAUD_COUNTER(baud, signal, CE):
+    RESET = FALLING_EDGE_DETECT(signal)
+    s = False
+    n = 8
+    m = baud
+    counter = Counter(n, cin=False, cout=True, incr=1, next=False,
+                   ce=True, r=True, s=False)
+    reset = Decode(m - 1, n)(counter)
+
+    reset = Or2()(reset, RESET)
+    reset = And2()(reset, CE)
+    wire(reset, counter.RESET) 
+
+    wire(CE, counter.CE)
     
-    output = array(baud.COUT,0,0,0,0,0,0,0)
+    output = Decode(baud/2, n)(counter)
+
+    return output
+
+def UART_READER(signal):
+    
+    baud = BAUD_COUNTER(103, signal, 1)
+    
+    output = array(baud, 0, 0, 0, 0, 0, 0, 0)
     return output
 
 icestick = IceStick()
@@ -111,6 +142,7 @@ icestick.J1[2].rename('D5').output().on()
 icestick.J1[3].rename('D6').output().on()
 icestick.J1[4].rename('D7').output().on()
 icestick.PMOD1[3].output().rename('I').on()
+icestick.PMOD1[0].input().rename('O').on()
 
 main = icestick.main()
 
@@ -148,8 +180,8 @@ RADDR = RAM_ADVANCE(num_bytes, payloadComp, run, baud)
 ramb(RE=1, RCLKE=1, RADDR=RADDR, WE=1, WCLKE=1)
 
 signal = WS2811_STREAM(shift, dataMask, clock)
-#test = array(0,0,0,0,0,0,0,0)
-test = UART_READER()
+
+test = UART_READER(main.O)
 
 wire(test[0],	main.D0)
 wire(test[1],   main.D1)
@@ -158,7 +190,7 @@ wire(test[3],   main.D3)
 wire(test[4],   main.D4)
 wire(test[5],   main.D5)
 wire(test[6],   main.D6)
-wire(test[7],   main.D7)
+wire(main.O,   main.D7)
 wire(signal,        main.I)
 
 compile(sys.argv[1], main)
