@@ -150,11 +150,8 @@ def UART_MEMORY(signal, raddr, num_bytes):
 	WDATA= array(shiftReg.O[1],shiftReg.O[2],shiftReg.O[3],shiftReg.O[4],
 		shiftReg.O[5],shiftReg.O[6],shiftReg.O[7],shiftReg.O[8])
 
-	addressCounter = ResetModMCounter(num_bytes, 8,0,nextByte)
-	uncorrectedAddr = array(addressCounter.O[0], addressCounter.O[1], 
-		addressCounter.O[2], addressCounter.O[3], addressCounter.O[4], 
-		addressCounter.O[5], addressCounter.O[6], addressCounter.O[7], 
-		0)
+	addressCounter = Counter(9, ce=True)(CE=nextByte)
+	uncorrectedAddr = addressCounter
 	correctedAddr = Add(9)(I0=uncorrectedAddr, I1=array(*int2seq(0, 9)))
 
 	RADDR = raddr
@@ -163,6 +160,52 @@ def UART_MEMORY(signal, raddr, num_bytes):
 	ramb(RE=1, RCLKE=1, RADDR=RADDR, WE=WE, WCLKE=1, WADDR=WADDR, WDATA=WDATA)
     
 	return rdata
+
+def LOCAL_ADDRESS(addr):
+	isZeroRange = And2()(I0=UGT(11)(I0=addr, I1=array(*int2seq(0, 11))), I1=UGT(11)(I1=addr, I0=array(*int2seq(511, 11))))
+	isOneRange = And2()(I0=UGT(11)(I0=addr, I1=array(*int2seq(512, 11))), I1=UGT(11)(I1=addr, I0=array(*int2seq(1023, 11))))
+	isTwoRange = And2()(I0=UGT(11)(I0=addr, I1=array(*int2seq(1024, 11))), I1=UGT(11)(I1=addr, I0=array(*int2seq(1535, 11))))
+	
+	firstRangeVal = Mux(2,11)(I0=array(*int2seq(0, 11)), I1=array(*int2seq(512, 11)), S=isOneRange)
+	secondRangeVal = Mux(2,11)(I0=array(*int2seq(0, 11)), I1=array(*int2seq(1024, 11)), S=isTwoRange)
+
+	firstRangeAddr = Sub(11)(I1=addr, I0=firstRangeVal)
+	secondRangeAddr = Sub(11)(I1=firstRangeAddr, I0=firstRangeVal)
+	localAddr = array(secondRangeAddr[0], secondRangeAddr[1], secondRangeAddr[2], secondRangeAddr[3],
+		secondRangeAddr[4], secondRangeAddr[5], secondRangeAddr[6], secondRangeAddr[7], 
+		secondRangeAddr[8], isZeroRange, isOneRange, isTwoRange)
+
+	return localAddr
+
+
+def MEGA_MEMORY(RADDR, WADDR, WE, WDATA):
+	localRAddrTrans = LOCAL_ADDRESS(RADDR)
+	localRADDR = array(localRAddrTrans[0], localRAddrTrans[1], localRAddrTrans[2], localRAddrTrans[3],
+		localRAddrTrans[4], localRAddrTrans[5], localRAddrTrans[6], localRAddrTrans[7], localRAddrTrans[8])
+	ram0RE = localRAddrTrans[9]
+	ram1RE = localRAddrTrans[10]
+	ram2RE = localRAddrTrans[11]
+
+	localWAddrTrans = LOCAL_ADDRESS(WADDR)
+	localWADDR = array(localWAddrTrans[0], localWAddrTrans[1], localWAddrTrans[2], localWAddrTrans[3],
+		localWAddrTrans[4], localWAddrTrans[5], localWAddrTrans[6], localWAddrTrans[7], localWAddrTrans[8])
+	ram0WE = And2(I0=localWAddrTrans[9], I1=WE) 
+	ram1WE = And2(I0=localWAddrTrans[10], I1=WE) 
+	ram2WE = And2(I0=localWAddrTrans[11], I1=WE) 
+
+	rom = range(512)
+	for i in range(512):
+		rom[i] = 0
+
+	ram0 = RAMB(rom)
+	ram0(RE=ram0RE, RCLKE=1, RADDR=localRADDR, WE=ram0WE, WCLKE=1, WADDR=localWADDR, WDATA=WDATA)
+	ram1 = RAMB(rom)
+	ram1(RE=ram1RE, RCLKE=1, RADDR=localRADDR, WE=ram1WE, WCLKE=1, WADDR=localWADDR, WDATA=WDATA)
+	ram2 = RAMB(rom)
+	ram2(RE=ram2RE, RCLKE=1, RADDR=localRADDR, WE=ram2WE, WCLKE=1, WADDR=localWADDR, WDATA=WDATA)
+
+	output = array(0,0,0,0,0,0,0,0)
+	return output
 
 icestick = IceStick()
 icestick.Clock.on()
@@ -188,20 +231,15 @@ clock = Counter(4, cout=True, incr=1)
 baud = clock.COUT
 
 #Don't have zero LEDS, unexpected things will happen
-num_led = 50
+num_led = 100
 num_bytes = num_led * 3 - 1
 size = int(math.ceil(math.log(num_bytes + 8, 2))) 
 
-#Set colors
-# rom = range(512)
-# for i in range(num_led):
-#     color = colorsys.hls_to_rgb(i * (1.0/num_led), 0.05, 1)
-#     for j in range(3):
-#         rom[(i * 3) + j + 1]=(int(color[j] * 255))
+rom = range(512)
+for i in range(512):
+	rom[i] = 0
 
-# ramb = RAMB( rom )
-# data = array(ramb.RDATA[0], ramb.RDATA[1], ramb.RDATA[2], ramb.RDATA[3],
-#              ramb.RDATA[4], ramb.RDATA[5], ramb.RDATA[6], ramb.RDATA[7])
+ramb = RAMB(rom)
 
 payloadCounter = PAYLOAD_TIMER(size, baud)
 payloadComp = UGT(size)(I0=array(*int2seq(num_bytes, size)), I1=payloadCounter)
@@ -217,13 +255,13 @@ RADDR = RAM_ADVANCE(num_bytes, payloadComp, run, baud)
 memory = UART_MEMORY(uart, RADDR, num_bytes + 1)
 shift(1,memory,load)
 
-# ramb(RE=1, RCLKE=1, RADDR=RADDR, WE=1, WCLKE=1)
+ramb(RE=1, RCLKE=1, RADDR=RADDR, WE=1, WCLKE=1)
 
 signal = WS2811_STREAM(shift, dataMask, clock)
 
 wire(uart,	main.D0)
 wire(signal,   main.D1)
-wire(main.RX,   main.D2)
+wire(0,   main.D2)
 wire(0,   main.D3)
 wire(0,   main.D4)
 wire(0,   main.D5)
