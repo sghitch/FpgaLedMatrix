@@ -33,8 +33,6 @@ def ROM(logn, init, A):
 
     return muxs[n-2]
 
-
-
 def PAYLOAD_TIMER(n, baud):
     bitCount = Counter(3, ce=True, cout = True)
     bitCount(ce=baud)
@@ -105,11 +103,8 @@ def RUN(enable, baud):
 
     return run
 
-def BAUD_COUNTER(baud, signal, CE):
-    RESET = FALLING_EDGE_DETECT(signal)
+def ResetModMCounter(m, n, RESET, CE):
     s = False
-    n = 8
-    m = baud
     counter = Counter(n, cin=False, cout=True, incr=1, next=False,
                    ce=True, r=True, s=False)
     reset = Decode(m - 1, n)(counter)
@@ -120,15 +115,34 @@ def BAUD_COUNTER(baud, signal, CE):
 
     wire(CE, counter.CE)
     
-    output = Decode(baud/2, n)(counter)
+    return counter
 
-    return output
+def BAUD_COUNTER(baud, signal, CE):
+    RESET = FALLING_EDGE_DETECT(signal)
+
+    counter = ResetModMCounter(baud, 8, RESET, CE)
+    output1 = Decode(baud/2, 8)(counter)
+    output2 = Decode(0, 8)(counter)
+
+    return array(output1, output2)
 
 def UART_READER(signal):
+    masterBaud = BAUD_COUNTER(103, signal, 1)
+    baud = masterBaud[0]
+    notSignal = Not()(signal)
+
+    startCounter = Counter(16, ce=True, r=True)(CE=baud, RESET=notSignal)
+    startIndicator = FALLING_EDGE_DETECT(signal)
+    shouldRead = Not()(UGT(16)(I0=array(*int2seq(10, 16)), I1=startCounter))
+    start = And2()(I0=shouldRead, I1=startIndicator)
+    readSetting = DFF(ce=True)
+    readSetting(ce=startIndicator, I=Not()(readSetting.O))
+
+    byteCounter = ResetModMCounter(10, 4, start, Or2()(baud, start))
+    byteCounterCout = Decode(9, 4)(byteCounter)
+    #readSetting = DFF(ce=True)(I=payloadComp, ce=baud)
     
-    baud = BAUD_COUNTER(103, signal, 1)
-    
-    output = array(baud, 0, 0, 0, 0, 0, 0, 0)
+    output = array(baud,masterBaud[1],0,0,0,0,0,0)
     return output
 
 icestick = IceStick()

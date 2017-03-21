@@ -49,7 +49,7 @@
 .gate SB_DFF C=CLKIN D=inst0.inst0.inst6_O Q=inst0.inst1.inst3_Q
 .attr src "ws2811.v:30"
 .gate SB_RAM40_4K MASK[0]=$false MASK[1]=$false MASK[2]=$false MASK[3]=$false MASK[4]=$false MASK[5]=$false MASK[6]=$false MASK[7]=$false MASK[8]=$false MASK[9]=$false MASK[10]=$false MASK[11]=$false MASK[12]=$false MASK[13]=$false MASK[14]=$false MASK[15]=$false RADDR[0]=inst23.inst0_O RADDR[1]=inst19.inst0.inst2_O RADDR[2]=inst23.inst4_O RADDR[3]=inst23.inst6_O RADDR[4]=inst23.inst8_O RADDR[5]=inst23.inst10_O RADDR[6]=inst23.inst12_O RADDR[7]=inst23.inst14_O RADDR[8]=inst23.inst16_O RADDR[9]=$false RADDR[10]=$false RCLK=CLKIN RCLKE=$true RDATA[0]=inst1_RDATA[0] RDATA[1]=inst1_RDATA[1] RDATA[2]=inst1_RDATA[2] RDATA[3]=inst1_RDATA[3] RDATA[4]=inst1_RDATA[4] RDATA[5]=inst1_RDATA[5] RDATA[6]=inst1_RDATA[6] RDATA[7]=inst1_RDATA[7] RDATA[8]=inst1_RDATA[8] RDATA[9]=inst1_RDATA[9] RDATA[10]=inst1_RDATA[10] RDATA[11]=inst1_RDATA[11] RDATA[12]=inst1_RDATA[12] RDATA[13]=inst1_RDATA[13] RDATA[14]=inst1_RDATA[14] RDATA[15]=inst1_RDATA[15] RE=$true WCLK=CLKIN WCLKE=$true WE=$true
-.attr src "ws2811.v:468"
+.attr src "ws2811.v:693"
 .param INIT_0 0000000010101010000000001111100000000001111000110000000010100000000000001100101100000001110010010000000010000010000000001001010000000001011010110000000000101000000000000010011100000001011000010000000000001010000000000000100000000001010000110000000000000000
 .param INIT_1 0000001110111010000000101010100000000011111000110000001110110101000000101000101000000011110010000000001111000011000000101000000000000011001110110000001101101001000000100010001000000011001001000000001101001011000000100000100000000010010101110000001101000001
 .param INIT_2 0000100111101011000010001011100100001000101000100000100111100001000010001100101000001000100010000000100111000011000010001100010100001000001010100000100101101001000010000111011000001000001000000000100101001011000010010000100100001000000000100000100101000001
@@ -69,15 +69,99 @@
 .param READ_MODE 00000000000000000000000000000001
 .param WRITE_MODE 00000000000000000000000000000001
 .gate SB_LUT4 I0=inst9.inst0.inst1_CO I1=inst9.inst1.inst1_Q I2=inst9.inst1.inst2_Q I3=$false O=inst10_O
-.attr src "ws2811.v:494"
+.attr src "ws2811.v:719"
 .param LUT_INIT 0000000010000000
+.gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst100_O
+.attr src "ws2811.v:809"
+.param LUT_INIT 0000000000000000
+.gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst101_O
+.attr src "ws2811.v:810"
+.param LUT_INIT 0000000000000000
+.gate SB_LUT4 I0=inst100_O I1=inst101_O I2=inst32.inst1.inst4_Q I3=$false O=inst102_O
+.attr src "ws2811.v:811"
+.param LUT_INIT 1100101011001010
+.gate SB_LUT4 I0=inst99_O I1=inst102_O I2=inst32.inst1.inst5_Q I3=$false O=inst103_O
+.attr src "ws2811.v:812"
+.param LUT_INIT 1100101011001010
+.gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst104_O
+.attr src "ws2811.v:813"
+.param LUT_INIT 0000000000000000
+.gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst105_O
+.attr src "ws2811.v:814"
+.param LUT_INIT 0000000000000000
+.gate SB_LUT4 I0=inst104_O I1=inst105_O I2=inst32.inst1.inst4_Q I3=$false O=inst106_O
+.attr src "ws2811.v:815"
+.param LUT_INIT 1100101011001010
+.gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst107_O
+.attr src "ws2811.v:816"
+.param LUT_INIT 0000000000000000
+.gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst108_O
+.attr src "ws2811.v:817"
+.param LUT_INIT 0000000000000000
+.gate SB_LUT4 I0=inst107_O I1=inst108_O I2=inst32.inst1.inst4_Q I3=$false O=inst109_O
+.attr src "ws2811.v:818"
+.param LUT_INIT 1100101011001010
 .gate SB_DFFE C=CLKIN D=inst12_O E=inst0.inst0.inst7_CO Q=inst11_Q
-.attr src "ws2811.v:495"
+.attr src "ws2811.v:720"
+.gate SB_LUT4 I0=inst106_O I1=inst109_O I2=inst32.inst1.inst5_Q I3=$false O=inst110_O
+.attr src "ws2811.v:819"
+.param LUT_INIT 1100101011001010
+.gate SB_LUT4 I0=inst103_O I1=inst110_O I2=inst32.inst1.inst6_Q I3=$false O=inst111_O
+.attr src "ws2811.v:820"
+.param LUT_INIT 1100101011001010
+.gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst112_O
+.attr src "ws2811.v:821"
+.param LUT_INIT 0000000000000000
+.gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst113_O
+.attr src "ws2811.v:822"
+.param LUT_INIT 0000000000000000
+.gate SB_LUT4 I0=inst112_O I1=inst113_O I2=inst32.inst1.inst4_Q I3=$false O=inst114_O
+.attr src "ws2811.v:823"
+.param LUT_INIT 1100101011001010
+.gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst115_O
+.attr src "ws2811.v:824"
+.param LUT_INIT 0000000000000000
+.gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst116_O
+.attr src "ws2811.v:825"
+.param LUT_INIT 0000000000000000
+.gate SB_LUT4 I0=inst115_O I1=inst116_O I2=inst32.inst1.inst4_Q I3=$false O=inst117_O
+.attr src "ws2811.v:826"
+.param LUT_INIT 1100101011001010
+.gate SB_LUT4 I0=inst114_O I1=inst117_O I2=inst32.inst1.inst5_Q I3=$false O=inst118_O
+.attr src "ws2811.v:827"
+.param LUT_INIT 1100101011001010
+.gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst119_O
+.attr src "ws2811.v:828"
+.param LUT_INIT 0000000000000000
 .gate SB_LUT4 I0=inst10_O I1=inst5_O I2=inst11_Q I3=$false O=inst12_O
-.attr src "ws2811.v:496"
+.attr src "ws2811.v:721"
 .param LUT_INIT 0101010001010100
+.gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst120_O
+.attr src "ws2811.v:829"
+.param LUT_INIT 0000000000000000
+.gate SB_LUT4 I0=inst119_O I1=inst120_O I2=inst32.inst1.inst4_Q I3=$false O=inst121_O
+.attr src "ws2811.v:830"
+.param LUT_INIT 1100101011001010
+.gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst122_O
+.attr src "ws2811.v:831"
+.param LUT_INIT 0000000000000000
+.gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst123_O
+.attr src "ws2811.v:832"
+.param LUT_INIT 0000000000000000
+.gate SB_LUT4 I0=inst122_O I1=inst123_O I2=inst32.inst1.inst4_Q I3=$false O=inst124_O
+.attr src "ws2811.v:833"
+.param LUT_INIT 1100101011001010
+.gate SB_LUT4 I0=inst121_O I1=inst124_O I2=inst32.inst1.inst5_Q I3=$false O=inst125_O
+.attr src "ws2811.v:834"
+.param LUT_INIT 1100101011001010
+.gate SB_LUT4 I0=inst118_O I1=inst125_O I2=inst32.inst1.inst6_Q I3=$false O=inst126_O
+.attr src "ws2811.v:835"
+.param LUT_INIT 1100101011001010
+.gate SB_LUT4 I0=inst111_O I1=inst126_O I2=inst32.inst1.inst7_Q I3=$false O=inst127_O
+.attr src "ws2811.v:836"
+.param LUT_INIT 1100101011001010
 .gate SB_LUT4 I0=inst10_O I1=inst11_Q I2=$false I3=$false O=inst13_O
-.attr src "ws2811.v:497"
+.attr src "ws2811.v:722"
 .param LUT_INIT 0010001000100010
 .gate SB_LUT4 I0=$true I1=inst1_RDATA[0] I2=inst14.LOAD I3=$false O=inst14.inst0_O
 .attr src "ws2811.v:198"
@@ -120,13 +204,13 @@
 .gate SB_DFFE C=CLKIN D=inst14.inst7_O E=inst0.inst0.inst7_CO Q=inst14.inst8.inst7_Q
 .attr src "ws2811.v:134"
 .gate SB_LUT4 I0=inst5_O I1=inst11_Q I2=$false I3=$false O=inst14.LOAD
-.attr src "ws2811.v:499"
+.attr src "ws2811.v:724"
 .param LUT_INIT 0010001000100010
 .gate SB_LUT4 I0=inst11_Q I1=$false I2=$false I3=$false O=inst17_O
-.attr src "ws2811.v:501"
+.attr src "ws2811.v:726"
 .param LUT_INIT 0101010101010101
 .gate SB_LUT4 I0=inst17_O I1=inst0.inst0.inst7_CO I2=inst5_O I3=$false O=inst18_O
-.attr src "ws2811.v:502"
+.attr src "ws2811.v:727"
 .param LUT_INIT 1000000010000000
 .gate SB_LUT4 I0=$false I1=inst19.inst0.inst1_CO I2=$true I3=$false O=inst19.inst0.inst0_O
 .attr src "ws2811.v:229"
@@ -201,7 +285,7 @@
 .gate SB_DFFE C=CLKIN D=inst2.inst0.inst4_O E=inst0.inst0.inst7_CO Q=inst2.inst1.inst2_Q
 .attr src "ws2811.v:67"
 .gate SB_LUT4 I0=inst22.inst17_CO I1=$false I2=$false I3=$false O=inst19.inst1.RESET
-.attr src "ws2811.v:504"
+.attr src "ws2811.v:729"
 .param LUT_INIT 0101010101010101
 .gate SB_LUT4 I0=inst19.inst0.inst1_CO I1=$false I2=$false I3=$false O=inst21.inst0_O
 .attr src "ws2811.v:293"
@@ -297,7 +381,7 @@
 .attr src "ws2811.v:313"
 .param LUT_INIT 1100101011001010
 .gate SB_LUT4 I0=inst27.inst7_CO I1=$false I2=$false I3=$false O=inst25_O
-.attr src "ws2811.v:509"
+.attr src "ws2811.v:734"
 .param LUT_INIT 0101010101010101
 .gate SB_LUT4 I0=inst24.inst0_O I1=$false I2=$false I3=$false O=inst26.inst0_O
 .attr src "ws2811.v:322"
@@ -320,18 +404,18 @@
 .gate SB_CARRY CI=inst27.inst5_CO CO=inst27.inst7_CO I0=inst0.inst1.inst3_Q I1=inst26.inst3_O
 .attr src "ws2811.v:17"
 .gate SB_LUT4 I0=inst25_O I1=inst8_Q I2=$false I3=$false O=inst28_O
-.attr src "ws2811.v:512"
+.attr src "ws2811.v:737"
 .param LUT_INIT 1000100010001000
 .gate SB_DFF C=CLKIN D=O Q=inst29_Q
-.attr src "ws2811.v:513"
+.attr src "ws2811.v:738"
 .gate SB_LUT4 I0=inst0.inst0.inst7_CO I1=inst2.inst0.inst5_CO I2=$false I3=$false O=inst3_O
-.attr src "ws2811.v:487"
+.attr src "ws2811.v:712"
 .param LUT_INIT 1000100010001000
 .gate SB_LUT4 I0=O I1=$false I2=$false I3=$false O=inst30_O
-.attr src "ws2811.v:514"
+.attr src "ws2811.v:739"
 .param LUT_INIT 0101010101010101
 .gate SB_LUT4 I0=inst29_Q I1=inst30_O I2=$false I3=$false O=inst31_O
-.attr src "ws2811.v:515"
+.attr src "ws2811.v:740"
 .param LUT_INIT 1000100010001000
 .gate SB_LUT4 I0=$false I1=inst32.inst0.inst1_CO I2=$true I3=$false O=inst32.inst0.inst0_O
 .attr src "ws2811.v:98"
@@ -383,25 +467,25 @@
 .gate SB_DFFESR C=CLKIN D=inst32.inst0.inst14_O E=$true Q=inst32.inst1.inst7_Q R=inst32.inst1.RESET
 .attr src "ws2811.v:345"
 .gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst33_O
-.attr src "ws2811.v:517"
+.attr src "ws2811.v:742"
 .param LUT_INIT 0000000000000000
 .gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst34_O
-.attr src "ws2811.v:518"
+.attr src "ws2811.v:743"
 .param LUT_INIT 0000000000000000
 .gate SB_LUT4 I0=inst33_O I1=inst34_O I2=inst32.inst1.inst4_Q I3=$false O=inst35_O
-.attr src "ws2811.v:519"
+.attr src "ws2811.v:744"
 .param LUT_INIT 1100101011001010
 .gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst36_O
-.attr src "ws2811.v:520"
+.attr src "ws2811.v:745"
 .param LUT_INIT 0000000000000000
 .gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst37_O
-.attr src "ws2811.v:521"
+.attr src "ws2811.v:746"
 .param LUT_INIT 0000000000000000
 .gate SB_LUT4 I0=inst36_O I1=inst37_O I2=inst32.inst1.inst4_Q I3=$false O=inst38_O
-.attr src "ws2811.v:522"
+.attr src "ws2811.v:747"
 .param LUT_INIT 1100101011001010
 .gate SB_LUT4 I0=inst35_O I1=inst38_O I2=inst32.inst1.inst5_Q I3=$false O=inst39_O
-.attr src "ws2811.v:523"
+.attr src "ws2811.v:748"
 .param LUT_INIT 1100101011001010
 .gate SB_LUT4 I0=$false I1=inst4.inst0.inst1_CO I2=$true I3=$false O=inst4.inst0.inst0_O
 .attr src "ws2811.v:98"
@@ -453,97 +537,97 @@
 .gate SB_DFFE C=CLKIN D=inst4.inst0.inst14_O E=inst3_O Q=inst4.inst1.inst7_Q
 .attr src "ws2811.v:134"
 .gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst40_O
-.attr src "ws2811.v:524"
+.attr src "ws2811.v:749"
 .param LUT_INIT 0000000000000000
 .gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst41_O
-.attr src "ws2811.v:525"
+.attr src "ws2811.v:750"
 .param LUT_INIT 0000000000000000
 .gate SB_LUT4 I0=inst40_O I1=inst41_O I2=inst32.inst1.inst4_Q I3=$false O=inst42_O
-.attr src "ws2811.v:526"
+.attr src "ws2811.v:751"
 .param LUT_INIT 1100101011001010
 .gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst43_O
-.attr src "ws2811.v:527"
+.attr src "ws2811.v:752"
 .param LUT_INIT 0000000001000000
 .gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst44_O
-.attr src "ws2811.v:528"
+.attr src "ws2811.v:753"
 .param LUT_INIT 0000000000000000
 .gate SB_LUT4 I0=inst43_O I1=inst44_O I2=inst32.inst1.inst4_Q I3=$false O=inst45_O
-.attr src "ws2811.v:529"
+.attr src "ws2811.v:754"
 .param LUT_INIT 1100101011001010
 .gate SB_LUT4 I0=inst42_O I1=inst45_O I2=inst32.inst1.inst5_Q I3=$false O=inst46_O
-.attr src "ws2811.v:530"
+.attr src "ws2811.v:755"
 .param LUT_INIT 1100101011001010
 .gate SB_LUT4 I0=inst39_O I1=inst46_O I2=inst32.inst1.inst6_Q I3=$false O=inst47_O
-.attr src "ws2811.v:531"
+.attr src "ws2811.v:756"
 .param LUT_INIT 1100101011001010
 .gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst48_O
-.attr src "ws2811.v:532"
+.attr src "ws2811.v:757"
 .param LUT_INIT 0000000000000000
 .gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst49_O
-.attr src "ws2811.v:533"
+.attr src "ws2811.v:758"
 .param LUT_INIT 0000000000000000
 .gate SB_LUT4 I0=inst7.inst15_CO I1=$false I2=$false I3=$false O=inst5_O
-.attr src "ws2811.v:489"
+.attr src "ws2811.v:714"
 .param LUT_INIT 0101010101010101
 .gate SB_LUT4 I0=inst48_O I1=inst49_O I2=inst32.inst1.inst4_Q I3=$false O=inst50_O
-.attr src "ws2811.v:534"
+.attr src "ws2811.v:759"
 .param LUT_INIT 1100101011001010
 .gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst51_O
-.attr src "ws2811.v:535"
+.attr src "ws2811.v:760"
 .param LUT_INIT 0000000000000000
 .gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst52_O
-.attr src "ws2811.v:536"
+.attr src "ws2811.v:761"
 .param LUT_INIT 0000000000000000
 .gate SB_LUT4 I0=inst51_O I1=inst52_O I2=inst32.inst1.inst4_Q I3=$false O=inst53_O
-.attr src "ws2811.v:537"
+.attr src "ws2811.v:762"
 .param LUT_INIT 1100101011001010
 .gate SB_LUT4 I0=inst50_O I1=inst53_O I2=inst32.inst1.inst5_Q I3=$false O=inst54_O
-.attr src "ws2811.v:538"
+.attr src "ws2811.v:763"
 .param LUT_INIT 1100101011001010
 .gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst55_O
-.attr src "ws2811.v:539"
+.attr src "ws2811.v:764"
 .param LUT_INIT 0000000000000000
 .gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst56_O
-.attr src "ws2811.v:540"
+.attr src "ws2811.v:765"
 .param LUT_INIT 0000000000000000
 .gate SB_LUT4 I0=inst55_O I1=inst56_O I2=inst32.inst1.inst4_Q I3=$false O=inst57_O
-.attr src "ws2811.v:541"
+.attr src "ws2811.v:766"
 .param LUT_INIT 1100101011001010
 .gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst58_O
-.attr src "ws2811.v:542"
+.attr src "ws2811.v:767"
 .param LUT_INIT 0000000000000000
 .gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst59_O
-.attr src "ws2811.v:543"
+.attr src "ws2811.v:768"
 .param LUT_INIT 0000000000000000
 .gate SB_LUT4 I0=inst58_O I1=inst59_O I2=inst32.inst1.inst4_Q I3=$false O=inst60_O
-.attr src "ws2811.v:544"
+.attr src "ws2811.v:769"
 .param LUT_INIT 1100101011001010
 .gate SB_LUT4 I0=inst57_O I1=inst60_O I2=inst32.inst1.inst5_Q I3=$false O=inst61_O
-.attr src "ws2811.v:545"
+.attr src "ws2811.v:770"
 .param LUT_INIT 1100101011001010
 .gate SB_LUT4 I0=inst54_O I1=inst61_O I2=inst32.inst1.inst6_Q I3=$false O=inst62_O
-.attr src "ws2811.v:546"
+.attr src "ws2811.v:771"
 .param LUT_INIT 1100101011001010
 .gate SB_LUT4 I0=inst47_O I1=inst62_O I2=inst32.inst1.inst7_Q I3=$false O=inst63_O
-.attr src "ws2811.v:547"
+.attr src "ws2811.v:772"
 .param LUT_INIT 1100101011001010
 .gate SB_LUT4 I0=inst63_O I1=inst31_O I2=$false I3=$false O=inst64_O
-.attr src "ws2811.v:548"
+.attr src "ws2811.v:773"
 .param LUT_INIT 1110111011101110
 .gate SB_LUT4 I0=inst64_O I1=$true I2=$false I3=$false O=inst32.inst1.RESET
-.attr src "ws2811.v:549"
+.attr src "ws2811.v:774"
 .param LUT_INIT 1000100010001000
 .gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst66_O
-.attr src "ws2811.v:550"
+.attr src "ws2811.v:775"
 .param LUT_INIT 0000000000000000
 .gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst67_O
-.attr src "ws2811.v:551"
+.attr src "ws2811.v:776"
 .param LUT_INIT 0000000000000000
 .gate SB_LUT4 I0=inst66_O I1=inst67_O I2=inst32.inst1.inst4_Q I3=$false O=inst68_O
-.attr src "ws2811.v:552"
+.attr src "ws2811.v:777"
 .param LUT_INIT 1100101011001010
 .gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst69_O
-.attr src "ws2811.v:553"
+.attr src "ws2811.v:778"
 .param LUT_INIT 0000000000000000
 .gate SB_CARRY CI=inst7.inst9_CO CO=inst7.inst11_CO I0=inst4.inst1.inst5_Q I1=$true
 .attr src "ws2811.v:109"
@@ -558,66 +642,66 @@
 .gate SB_CARRY CI=inst7.inst7_CO CO=inst7.inst9_CO I0=inst4.inst1.inst4_Q I1=$false
 .attr src "ws2811.v:107"
 .gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst70_O
-.attr src "ws2811.v:554"
+.attr src "ws2811.v:779"
 .param LUT_INIT 0000000000001000
 .gate SB_LUT4 I0=inst69_O I1=inst70_O I2=inst32.inst1.inst4_Q I3=$false O=inst71_O
-.attr src "ws2811.v:555"
+.attr src "ws2811.v:780"
 .param LUT_INIT 1100101011001010
 .gate SB_LUT4 I0=inst68_O I1=inst71_O I2=inst32.inst1.inst5_Q I3=$false O=inst72_O
-.attr src "ws2811.v:556"
+.attr src "ws2811.v:781"
 .param LUT_INIT 1100101011001010
 .gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst73_O
-.attr src "ws2811.v:557"
+.attr src "ws2811.v:782"
 .param LUT_INIT 0000000000000000
 .gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst74_O
-.attr src "ws2811.v:558"
+.attr src "ws2811.v:783"
 .param LUT_INIT 0000000000000000
 .gate SB_LUT4 I0=inst73_O I1=inst74_O I2=inst32.inst1.inst4_Q I3=$false O=inst75_O
-.attr src "ws2811.v:559"
+.attr src "ws2811.v:784"
 .param LUT_INIT 1100101011001010
 .gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst76_O
-.attr src "ws2811.v:560"
+.attr src "ws2811.v:785"
 .param LUT_INIT 0000000000000000
 .gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst77_O
-.attr src "ws2811.v:561"
+.attr src "ws2811.v:786"
 .param LUT_INIT 0000000000000000
 .gate SB_LUT4 I0=inst76_O I1=inst77_O I2=inst32.inst1.inst4_Q I3=$false O=inst78_O
-.attr src "ws2811.v:562"
+.attr src "ws2811.v:787"
 .param LUT_INIT 1100101011001010
 .gate SB_LUT4 I0=inst75_O I1=inst78_O I2=inst32.inst1.inst5_Q I3=$false O=inst79_O
-.attr src "ws2811.v:563"
+.attr src "ws2811.v:788"
 .param LUT_INIT 1100101011001010
 .gate SB_DFFE C=CLKIN D=inst5_O E=inst0.inst0.inst7_CO Q=inst8_Q
-.attr src "ws2811.v:492"
+.attr src "ws2811.v:717"
 .gate SB_LUT4 I0=inst72_O I1=inst79_O I2=inst32.inst1.inst6_Q I3=$false O=inst80_O
-.attr src "ws2811.v:564"
+.attr src "ws2811.v:789"
 .param LUT_INIT 1100101011001010
 .gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst81_O
-.attr src "ws2811.v:565"
+.attr src "ws2811.v:790"
 .param LUT_INIT 0000000000000000
 .gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst82_O
-.attr src "ws2811.v:566"
+.attr src "ws2811.v:791"
 .param LUT_INIT 0000000000000000
 .gate SB_LUT4 I0=inst81_O I1=inst82_O I2=inst32.inst1.inst4_Q I3=$false O=inst83_O
-.attr src "ws2811.v:567"
+.attr src "ws2811.v:792"
 .param LUT_INIT 1100101011001010
 .gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst84_O
-.attr src "ws2811.v:568"
+.attr src "ws2811.v:793"
 .param LUT_INIT 0000000000000000
 .gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst85_O
-.attr src "ws2811.v:569"
+.attr src "ws2811.v:794"
 .param LUT_INIT 0000000000000000
 .gate SB_LUT4 I0=inst84_O I1=inst85_O I2=inst32.inst1.inst4_Q I3=$false O=inst86_O
-.attr src "ws2811.v:570"
+.attr src "ws2811.v:795"
 .param LUT_INIT 1100101011001010
 .gate SB_LUT4 I0=inst83_O I1=inst86_O I2=inst32.inst1.inst5_Q I3=$false O=inst87_O
-.attr src "ws2811.v:571"
+.attr src "ws2811.v:796"
 .param LUT_INIT 1100101011001010
 .gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst88_O
-.attr src "ws2811.v:572"
+.attr src "ws2811.v:797"
 .param LUT_INIT 0000000000000000
 .gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst89_O
-.attr src "ws2811.v:573"
+.attr src "ws2811.v:798"
 .param LUT_INIT 0000000000000000
 .gate SB_LUT4 I0=$false I1=inst9.inst0.inst1_CO I2=$true I3=$false O=inst9.inst0.inst0_O
 .attr src "ws2811.v:51"
@@ -634,29 +718,38 @@
 .gate SB_DFFESR C=CLKIN D=inst9.inst0.inst4_O E=inst0.inst0.inst7_CO Q=inst9.inst1.inst2_Q R=inst13_O
 .attr src "ws2811.v:174"
 .gate SB_LUT4 I0=inst88_O I1=inst89_O I2=inst32.inst1.inst4_Q I3=$false O=inst90_O
-.attr src "ws2811.v:574"
+.attr src "ws2811.v:799"
 .param LUT_INIT 1100101011001010
 .gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst91_O
-.attr src "ws2811.v:575"
+.attr src "ws2811.v:800"
 .param LUT_INIT 0000000000000000
 .gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst92_O
-.attr src "ws2811.v:576"
+.attr src "ws2811.v:801"
 .param LUT_INIT 0000000000000000
 .gate SB_LUT4 I0=inst91_O I1=inst92_O I2=inst32.inst1.inst4_Q I3=$false O=inst93_O
-.attr src "ws2811.v:577"
+.attr src "ws2811.v:802"
 .param LUT_INIT 1100101011001010
 .gate SB_LUT4 I0=inst90_O I1=inst93_O I2=inst32.inst1.inst5_Q I3=$false O=inst94_O
-.attr src "ws2811.v:578"
+.attr src "ws2811.v:803"
 .param LUT_INIT 1100101011001010
 .gate SB_LUT4 I0=inst87_O I1=inst94_O I2=inst32.inst1.inst6_Q I3=$false O=inst95_O
-.attr src "ws2811.v:579"
+.attr src "ws2811.v:804"
 .param LUT_INIT 1100101011001010
 .gate SB_LUT4 I0=inst80_O I1=inst95_O I2=inst32.inst1.inst7_Q I3=$false O=inst96_O
-.attr src "ws2811.v:580"
+.attr src "ws2811.v:805"
+.param LUT_INIT 1100101011001010
+.gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst97_O
+.attr src "ws2811.v:806"
+.param LUT_INIT 0000000000000001
+.gate SB_LUT4 I0=inst32.inst0.inst1_CO I1=inst32.inst1.inst1_Q I2=inst32.inst1.inst2_Q I3=inst32.inst1.inst3_Q O=inst98_O
+.attr src "ws2811.v:807"
+.param LUT_INIT 0000000000000000
+.gate SB_LUT4 I0=inst97_O I1=inst98_O I2=inst32.inst1.inst4_Q I3=$false O=inst99_O
+.attr src "ws2811.v:808"
 .param LUT_INIT 1100101011001010
 .names inst96_O D0
 1 1
-.names $false D1
+.names inst127_O D1
 1 1
 .names $false D2
 1 1
@@ -750,6 +843,14 @@
 1 1
 .names inst0.inst1.inst3_Q inst0_O[3]
 1 1
+.names inst96_O inst129.CE
+1 1
+.names CLKIN inst129.CLK
+1 1
+.names inst96_O inst129.inst1.CE
+1 1
+.names CLKIN inst129.inst1.CLK
+1 1
 .names inst0.inst0.inst7_CO inst14.CE
 1 1
 .names CLKIN inst14.CLK
@@ -823,6 +924,10 @@
 .names inst14.inst8.inst6_Q inst14.inst8_O[6]
 1 1
 .names inst14.inst8.inst7_Q inst14.inst8_O[7]
+1 1
+.names CLKIN inst141.CLK
+1 1
+.names CLKIN inst141.inst1.CLK
 1 1
 .names inst14.inst8.inst7_Q inst14_O
 1 1
