@@ -9,3 +9,4 @@ set_io D2 56
 set_io D1 60
 set_io D0 61
 set_io CLKIN 21
+set_io RX 9

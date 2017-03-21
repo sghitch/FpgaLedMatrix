@@ -58,7 +58,7 @@ def WS2811_STREAM(data, mask, clock):
     return signal
 
 def EDGE_DETECT(signal):
-    edgeFlipFlop = DFF(init=0, ce=False, r=False, s=False)
+    edgeFlipFlop = DFF()
     edgeFlipFlop(I=signal)
 
     edgeNot = Not()(edgeFlipFlop.O)
@@ -67,7 +67,7 @@ def EDGE_DETECT(signal):
     return edgeAnd
 
 def FALLING_EDGE_DETECT(signal):
-    edgeFlipFlop = DFF(init=0, ce=False, r=False, s=False)
+    edgeFlipFlop = DFF()
     edgeFlipFlop(I=signal)
 
     edgeNot = Not()(signal)
@@ -122,28 +122,47 @@ def BAUD_COUNTER(baud, signal, CE):
 
     counter = ResetModMCounter(baud, 8, RESET, CE)
     output1 = Decode(baud/2, 8)(counter)
-    output2 = Decode(0, 8)(counter)
 
-    return array(output1, output2)
+    return output1
 
-def UART_READER(signal):
-    masterBaud = BAUD_COUNTER(103, signal, 1)
-    baud = masterBaud[0]
-    notSignal = Not()(signal)
+def UART_MEMORY(signal, raddr, num_bytes):
+	baud = BAUD_COUNTER(103, signal, 1)
+	notSignal = Not()(signal)
+	startIndicator = FALLING_EDGE_DETECT(signal)
 
-    startCounter = Counter(16, ce=True, r=True)(CE=baud, RESET=notSignal)
-    startIndicator = FALLING_EDGE_DETECT(signal)
-    shouldRead = Not()(UGT(16)(I0=array(*int2seq(10, 16)), I1=startCounter))
-    start = And2()(I0=shouldRead, I1=startIndicator)
-    readSetting = DFF(ce=True)
-    readSetting(ce=startIndicator, I=Not()(readSetting.O))
+	countCompare = UGT(4)
+	nextByte = And2()(I0=Not()(countCompare), I1=startIndicator)
+	countEnable = Or2()(I0= And2()(I0=countCompare, I1=baud), I1=nextByte)
+	byteCounter = ResetModMCounter(11, 4, 0, countEnable)
+	countCompare(I0=array(*int2seq(9, 4)), I1=byteCounter.O)
 
-    byteCounter = ResetModMCounter(10, 4, start, Or2()(baud, start))
-    byteCounterCout = Decode(9, 4)(byteCounter)
-    #readSetting = DFF(ce=True)(I=payloadComp, ce=baud)
+	shiftReg = SIPO(10, ce=True)
+	wire(countEnable, shiftReg.CE)
+	shiftReg(signal)
+	
+	rom = range(512)
+	for i in range(512):
+		rom[i] = 0
+
+	ramb = RAMB( rom )
+	rdata = array(ramb.RDATA[7], ramb.RDATA[6], ramb.RDATA[5], ramb.RDATA[4],
+		ramb.RDATA[3], ramb.RDATA[2], ramb.RDATA[1], ramb.RDATA[0])
+	WDATA= array(shiftReg.O[1],shiftReg.O[2],shiftReg.O[3],shiftReg.O[4],
+		shiftReg.O[5],shiftReg.O[6],shiftReg.O[7],shiftReg.O[8])
+
+	addressCounter = ResetModMCounter(num_bytes, 8,0,nextByte)
+	uncorrectedAddr = array(addressCounter.O[0], addressCounter.O[1], 
+		addressCounter.O[2], addressCounter.O[3], addressCounter.O[4], 
+		addressCounter.O[5], addressCounter.O[6], addressCounter.O[7], 
+		0)
+	correctedAddr = Add(9)(I0=uncorrectedAddr, I1=array(*int2seq(0, 9)))
+
+	RADDR = raddr
+	WADDR = correctedAddr
+	WE = nextByte
+	ramb(RE=1, RCLKE=1, RADDR=RADDR, WE=WE, WCLKE=1, WADDR=WADDR, WDATA=WDATA)
     
-    output = array(baud,masterBaud[1],0,0,0,0,0,0)
-    return output
+	return rdata
 
 icestick = IceStick()
 icestick.Clock.on()
@@ -157,8 +176,13 @@ icestick.J1[3].rename('D6').output().on()
 icestick.J1[4].rename('D7').output().on()
 icestick.PMOD1[3].output().rename('I').on()
 icestick.PMOD1[0].input().rename('O').on()
+icestick.RX.input().on()
 
 main = icestick.main()
+
+filter1 = DFF()(I=main.O)
+filter2 = DFF()(I=filter1)
+uart = DFF()(I=filter2)
 
 clock = Counter(4, cout=True, incr=1)
 baud = clock.COUT
@@ -169,15 +193,15 @@ num_bytes = num_led * 3 - 1
 size = int(math.ceil(math.log(num_bytes + 8, 2))) 
 
 #Set colors
-rom = range(512)
-for i in range(num_led):
-    color = colorsys.hls_to_rgb(i * (1.0/num_led), 0.05, 1)
-    for j in range(3):
-        rom[(i * 3) + j + 1]=(int(color[j] * 255))
+# rom = range(512)
+# for i in range(num_led):
+#     color = colorsys.hls_to_rgb(i * (1.0/num_led), 0.05, 1)
+#     for j in range(3):
+#         rom[(i * 3) + j + 1]=(int(color[j] * 255))
 
-ramb = RAMB( rom )
-data = array(ramb.RDATA[0], ramb.RDATA[1], ramb.RDATA[2], ramb.RDATA[3],
-             ramb.RDATA[4], ramb.RDATA[5], ramb.RDATA[6], ramb.RDATA[7])
+# ramb = RAMB( rom )
+# data = array(ramb.RDATA[0], ramb.RDATA[1], ramb.RDATA[2], ramb.RDATA[3],
+#              ramb.RDATA[4], ramb.RDATA[5], ramb.RDATA[6], ramb.RDATA[7])
 
 payloadCounter = PAYLOAD_TIMER(size, baud)
 payloadComp = UGT(size)(I0=array(*int2seq(num_bytes, size)), I1=payloadCounter)
@@ -186,26 +210,26 @@ dataMask = DFF(ce=True)(I=payloadComp, ce=baud)
 run = RUN(payloadComp, baud)
 shift = PISO(8, ce=True)
 load = LUT2(I0&~I1)(payloadComp,run)
-shift(1,data,load)
 wire(baud, shift.CE)
 readyShift = LUT2(~I0 & I1)(run, baud)
 
 RADDR = RAM_ADVANCE(num_bytes, payloadComp, run, baud)
-ramb(RE=1, RCLKE=1, RADDR=RADDR, WE=1, WCLKE=1)
+memory = UART_MEMORY(uart, RADDR, num_bytes + 1)
+shift(1,memory,load)
+
+# ramb(RE=1, RCLKE=1, RADDR=RADDR, WE=1, WCLKE=1)
 
 signal = WS2811_STREAM(shift, dataMask, clock)
 
-test = UART_READER(main.O)
-
-wire(test[0],	main.D0)
-wire(test[1],   main.D1)
-wire(test[2],   main.D2)
-wire(test[3],   main.D3)
-wire(test[4],   main.D4)
-wire(test[5],   main.D5)
-wire(test[6],   main.D6)
-wire(main.O,   main.D7)
-wire(signal,        main.I)
+wire(uart,	main.D0)
+wire(signal,   main.D1)
+wire(main.RX,   main.D2)
+wire(0,   main.D3)
+wire(0,   main.D4)
+wire(0,   main.D5)
+wire(0,   main.D6)
+wire(0,   main.D7)
+wire(signal,    main.I)
 
 compile(sys.argv[1], main)
 

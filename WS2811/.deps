@@ -1,8 +1,8 @@
 {
     ".deps_version": 2, 
     "python ws2811.py build/ws2811": {
-        "build/ws2811.pcf": "output-606c7e5aeb155ac85c1da5bca58d2a17", 
-        "build/ws2811.v": "output-ee209f1797a4ee0f5279befc0dbe8b0d", 
-        "ws2811.py": "input-3770663f4fb95853afb9bf0afb7191e0"
+        "build/ws2811.pcf": "output-e29eac4d60eb39723c615f8ccada8656", 
+        "build/ws2811.v": "output-25e2f888f161199eb17cdf83ac5522ef", 
+        "ws2811.py": "input-4bff7a156687c4f5e86b9963ca9bdc9c"
     }
 }
